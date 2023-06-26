@@ -52,7 +52,7 @@ function getFieldsValue() {
   for (let i = 0; i < unref(schemas).length; i++) {
     const schema = unref(schemas)[i]
 
-    if (!getProp(schema, 'ifShow')) {
+    if (!getProp(schema, schema.ifShow, true)) {
       cloneModel[schema.field] = null
       continue
     }
@@ -68,7 +68,7 @@ function setFieldsValue(val: any) {
   for (const key in val) {
     const schema = unref(schemas).find((schema: any) => schema.field === key)
 
-    if (!schema || !getProp(schema, 'ifShow'))
+    if (!schema || !getProp(schema, schema.ifShow, true))
       continue
 
     if (schema?.hook?.set)
@@ -78,23 +78,14 @@ function setFieldsValue(val: any) {
   }
 }
 
-function getProp(schema: any, prop: string) {
-  if (isUndefined(schema[prop]))
-    return true
+function getProp(schema: any, prop: string, defaultValue?: any) {
+  if (isUndefined(prop) && !isUndefined(defaultValue))
+    return defaultValue
 
-  if (isFunction(schema[prop]))
-    schema[prop] = schema[prop]({ model: unref(model) })
+  if (isFunction(prop))
+    prop = prop({ model: unref(model), field: schema.field })
 
-  return schema[prop]
-}
-
-function getRules(schema: any) {
-  let { rules } = schema
-
-  if (isFunction(rules))
-    rules = rules({ model: unref(model), field: schema.field })
-
-  return rules
+  return prop
 }
 
 function getComponent(schema: any) {
@@ -157,18 +148,18 @@ defineExpose({
       >
         <template v-for="(schema, schemaIndex) in schemas">
           <NFormItemGi
-            v-if="getProp(schema, 'show') && getProp(schema, 'ifShow')"
+            v-if="getProp(schema, schema.show, true) && getProp(schema, schema.ifShow, true)"
             v-bind="{
-              ...getProp(schema, 'giProps'),
-              ...getProp(schema, 'itemProps'),
+              ...getProp(schema, schema.giProps),
+              ...getProp(schema, schema.itemProps),
             }"
             :key="schemaIndex"
             :path="schema.field"
-            :rule="getRules(schema)"
+            :rule="getProp(schema, schema.rules)"
             :span="schema.giProps?.span || giSpan"
           >
             <template
-              v-if="getProp(schema, 'showLabel')"
+              v-if="getProp(schema, schema.showLabel, true)"
               #label
             >
               <NSpace
