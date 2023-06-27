@@ -24,7 +24,7 @@ export function usePagination(props: Props, load: Function) {
   const mergePagination = computed(() => isBoolean(props.pagination) ? props.pagination : merge(defaultPagination, props.pagination))
   const paginationParams = computed(() => ({
     page: (unref(mergePagination) as PaginationProps)?.page,
-    pageSize: (unref(mergePagination) as PaginationProps)?.pageSize,
+    size: (unref(mergePagination) as PaginationProps)?.pageSize,
   }))
 
   return {

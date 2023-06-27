@@ -34,6 +34,7 @@ function handleClick() {
     v-bind="$attrs"
     @click="handleClick"
   >
-    批量删除
+    <slot v-if="$slots.default" />
+    <span v-else>批量删除</span>
   </NButton>
 </template>

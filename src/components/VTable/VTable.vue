@@ -5,6 +5,7 @@ import { useCheckedRow } from './hooks/useCheckedRow'
 import { useColumn } from './hooks/useColumn'
 import { useHeight } from './hooks/useHeight'
 import { usePagination } from './hooks/usePagination'
+import { useSort } from './hooks/useSort'
 import { useTableTools } from './hooks/useTableTools'
 
 export interface Props {
@@ -41,6 +42,7 @@ const tableRef = ref()
 const { height } = useHeight(tableRef)
 const { defaultColumns, filterColumns, handleResetColumns } = useColumn(props)
 const { defaultPagination, mergePagination, paginationParams } = usePagination(props, load)
+const { sort, handleUpdateSorter } = useSort(defaultColumns, reload)
 const { checkedRowKeys, getCheckedRowKeys, setCheckedRowKeys } = useCheckedRow()
 const { striped, size, handleStriped, handleDensity } = useTableTools(props)
 const [loading, toggleLoading] = useToggle()
@@ -54,9 +56,9 @@ async function load(params?: any) {
   checkedRowKeys.value = []
   try {
     toggleLoading(true)
-    const { list, total } = await props.load({ ...unref(paginationParams), ...unref(searchParams), ...params })
+    const { list, pagination } = await props.load({ ...unref(paginationParams), ...unref(sort), ...unref(searchParams), ...params })
     data.value = list
-    defaultPagination.itemCount = total
+    defaultPagination.itemCount = pagination.total
   }
   catch (err) {
 
@@ -136,6 +138,7 @@ defineExpose({
           height: `${height}px`,
           minHeight: '300px',
         }"
+        @update:sorter="handleUpdateSorter"
       />
     </NCard>
   </div>
