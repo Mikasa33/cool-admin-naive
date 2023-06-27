@@ -14,6 +14,8 @@
     "@unocss/reset": "^0.53.1",
     "@vueuse/core": "^10.1.2",
     "@vueuse/integrations": "^10.1.2",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^1.4.0",
     "dayjs": "^1.11.8",
     "less": "^4.1.3",
