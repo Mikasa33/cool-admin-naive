@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { NSpace, useMessage } from 'naive-ui'
+import { searchSchemas } from './schemas/search'
 import { columns } from './schemas/table'
 import Edit from './edit.vue'
 import { VTableColumnBtn, VTableColumnDeleteBtn } from '@/components/VTable'
@@ -22,13 +23,7 @@ const searchGiProps = {
   span: 'xs:24 s:12 m:12 l:8',
   offset: 'xs:0 s:0 m:0 l:8',
 }
-const searchSchemas = [
-  {
-    field: 'keyWord',
-    label: '名称、标识',
-    component: 'NInput',
-  },
-]
+
 const checkedRowKeys = computed(() => unref(tableRef)?.getCheckedRowKeys() || [])
 
 async function load(params: any) {

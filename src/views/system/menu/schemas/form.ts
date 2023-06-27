@@ -1,3 +1,4 @@
+import { menuType } from './table'
 import { menu } from '@/apis/system/menu'
 import { deepPaths, deepTree } from '@/utils'
 
@@ -23,11 +24,7 @@ export const schemas = [
     label: '类型',
     component: 'VRadio',
     componentProps: {
-      options: [
-        { value: 0, label: '目录' },
-        { value: 1, label: '菜单' },
-        { value: 2, label: '权限' },
-      ],
+      options: menuType,
     },
     defaultValue: 0,
   },

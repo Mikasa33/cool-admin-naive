@@ -1,10 +1,10 @@
 import { NTag } from 'naive-ui'
 import dayjs from 'dayjs'
 
-const mentType = [
+export const menuType = [
   { value: 0, label: '目录', type: 'primary' },
-  { value: 1, label: '菜单', type: 'warning' },
-  { value: 2, label: '权限', type: 'error' },
+  { value: 1, label: '菜单', type: 'info' },
+  { value: 2, label: '权限', type: 'warning' },
 ]
 
 export const columns = [
@@ -36,7 +36,10 @@ export const columns = [
     align: 'center',
     width: 80,
     render(row: any) {
-      const find = mentType.find((item: any) => item.value === row.type)
+      const find = menuType.find((item: any) => item.value === row.type)
+      if (!find)
+        return
+
       return find ? h(NTag, { type: find.type, bordered: false }, () => find.label) : null
     },
   },
