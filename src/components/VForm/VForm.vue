@@ -53,7 +53,8 @@ function getFieldsValue() {
     const schema = unref(schemas)[i]
 
     if (!getProp(schema, schema.ifShow, true)) {
-      cloneModel[schema.field] = null
+      // cloneModel[schema.field] = null
+      delete cloneModel[schema.field]
       continue
     }
 
@@ -74,11 +75,11 @@ function setFieldsValue(val: any) {
     if (schema?.hook?.set)
       schema.hook.set({ model: val })
 
-    model.value[schema.field] = val[schema.field]
+    model.value[schema.field] = val[schema?.field]
   }
 }
 
-function getProp(schema: any, prop: string, defaultValue?: any) {
+function getProp(schema: any, prop: any, defaultValue?: any) {
   if (isUndefined(prop) && !isUndefined(defaultValue))
     return defaultValue
 
@@ -89,7 +90,12 @@ function getProp(schema: any, prop: string, defaultValue?: any) {
 }
 
 function getComponent(schema: any) {
-  return componentMap.get(schema.component)
+  let { component, field } = schema
+
+  if (isFunction(component))
+    component = component({ model: unref(model), field })
+
+  return componentMap.get(component)
 }
 
 function getComponentProps(schema: any) {
