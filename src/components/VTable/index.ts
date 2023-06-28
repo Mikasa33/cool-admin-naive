@@ -1,4 +1,4 @@
 import VTableColumnBtn from './VTableColumnBtn.vue'
-import VTableColumnDeleteBtn from './VTableColumnDeleteBtn.vue'
+import VTableColumnDialogBtn from './VTableColumnDialogBtn.vue'
 
-export { VTableColumnBtn, VTableColumnDeleteBtn }
+export { VTableColumnBtn, VTableColumnDialogBtn }

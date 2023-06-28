@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-const props = defineProps<{
-  delete?: Function
-}>()
+const props = withDefaults(defineProps<{
+  text?: string
+  fn?: Function
+}>(), {
+  text: '删除',
+})
 
 const emit = defineEmits(['confirm', 'cancel'])
 
@@ -11,12 +14,12 @@ function handleClick() {
   const d = dialog.warning({
     autoFocus: false,
     title: '提示',
-    content: '是否确认删除此数据？',
+    content: `是否确认${props.text}此数据？`,
     positiveText: '确 认',
     negativeText: '取 消',
     onPositiveClick: async () => {
       d.loading = true
-      await props.delete?.()
+      await props.fn?.()
     },
     onNegativeClick: () => {
       emit('cancel')
@@ -33,6 +36,6 @@ function handleClick() {
     v-bind="$attrs"
     @click="handleClick"
   >
-    删除
+    {{ text }}
   </NButton>
 </template>

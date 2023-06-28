@@ -12,6 +12,6 @@ function handleClick() {
     v-bind="$attrs"
     @click="handleClick"
   >
-    新 建
+    <slot />
   </NButton>
 </template>
