@@ -7,6 +7,7 @@ export interface Props {
   selectedKeys?: string[] | number[]
   load: Function
   delete: Function
+  isAdd?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -50,23 +51,29 @@ const dropdown = reactive<any>({
   data: null,
   x: 0,
   y: 0,
-  options: [
-    {
-      key: 'add',
-      label: '新建',
-      icon: () => h('div', { class: 'i-icon-park-outline-plus' }),
-    },
-    {
-      key: 'edit',
-      label: '编辑',
-      icon: () => h('div', { class: 'i-icon-park-outline-edit' }),
-    },
-    {
-      key: 'delete',
-      label: '删除',
-      icon: () => h('div', { class: 'i-icon-park-outline-delete' }),
-    },
-  ],
+  options: computed(() => {
+    const options = [
+      {
+        key: 'edit',
+        label: '编辑',
+        icon: () => h('div', { class: 'i-icon-park-outline-edit' }),
+      },
+      {
+        key: 'delete',
+        label: '删除',
+        icon: () => h('div', { class: 'i-icon-park-outline-delete' }),
+      },
+    ]
+    if (props.isAdd) {
+      options.unshift({
+        key: 'add',
+        label: '新建',
+        icon: () => h('div', { class: 'i-icon-park-outline-plus' }),
+      })
+    }
+
+    return options
+  }),
 })
 
 function nodeProps({ option }: any) {
@@ -182,6 +189,7 @@ onMounted(() => {
 
 defineExpose({
   refresh: load,
+  getData: () => unref(data),
 })
 </script>
 
@@ -247,7 +255,6 @@ defineExpose({
         :node-props="nodeProps"
         :show-irrelevant-nodes="false"
         selectable
-        draggable
         block-line
         class="tree"
         @drop="handleDrop"
