@@ -2,6 +2,12 @@ import dayjs from 'dayjs'
 
 export const columns = [
   {
+    type: 'selection',
+    fixed: 'left',
+    align: 'center',
+    width: 50,
+  },
+  {
     key: '#',
     title: '#',
     align: 'center',
@@ -11,21 +17,29 @@ export const columns = [
     },
   },
   {
-    key: 'userId',
-    title: '用户 ID',
-    align: 'center',
-    width: 100,
-  },
-  {
-    key: 'name',
-    title: '昵称',
+    key: 'userName',
+    title: '操作人',
     align: 'center',
   },
   {
-    key: 'action',
-    title: '请求地址',
+    key: 'data',
+    title: '数据',
     align: 'center',
     width: 200,
+    ellipsis: {
+      tooltip: {
+        style: { maxWidth: '800px' },
+      },
+    },
+    render(row: any) {
+      return JSON.stringify(row.data, null, 4)
+    },
+  },
+  {
+    key: 'url',
+    title: '请求地址',
+    align: 'center',
+    width: 250,
     ellipsis: {
       tooltip: true,
     },
@@ -45,14 +59,10 @@ export const columns = [
     },
   },
   {
-    key: 'ip',
-    title: 'IP',
+    key: 'count',
+    title: '删除条数',
     align: 'center',
-  },
-  {
-    key: 'ipAddr',
-    title: 'IP 地址',
-    align: 'center',
+    width: 100,
   },
   {
     key: 'createTime',

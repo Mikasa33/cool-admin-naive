@@ -15,7 +15,7 @@ export const columns = [
     align: 'center',
     width: 80,
     render(row: any) {
-      return h(NAvatar, { src: row.headImg, objectFit: 'cover' })
+      return h('div', { class: 'text-0px flex-center ' }, h(NAvatar, { src: row.headImg, objectFit: 'cover', style: { height: '60px' } }))
     },
   },
   {

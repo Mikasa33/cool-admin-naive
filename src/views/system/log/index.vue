@@ -71,12 +71,12 @@ onMounted(async () => {
       :scroll-x="1330"
     >
       <template #action>
-        <NButton
+        <VTableBtn
           type="error"
           @click="handleClear"
         >
           清 空
-        </NButton>
+        </VTableBtn>
         <NForm
           label-placement="left"
           :show-feedback="false"

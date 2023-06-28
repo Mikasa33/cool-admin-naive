@@ -22,7 +22,6 @@ async function handleOpen(params: { edit?: boolean; id?: number | string }) {
   if (params?.edit) {
     try {
       const data = await role.info({ id: params.id })
-      console.log(data)
       unref(formRef).setFieldsValue(data)
     }
     catch (err) {

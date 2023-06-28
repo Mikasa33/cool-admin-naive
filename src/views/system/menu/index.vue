@@ -2,7 +2,7 @@
 import { NSpace, useMessage } from 'naive-ui'
 import { columns } from './schemas/table'
 import Edit from './edit.vue'
-import { VTableColumnBtn, VTableColumnDeleteBtn } from '@/components/VTable'
+import { VTableColumnBtn, VTableColumnDialogBtn } from '@/components/VTable'
 import { deepTree } from '@/utils'
 import { menu } from '@/apis/system/menu'
 
@@ -11,11 +11,12 @@ const message = useMessage()
 const tableRef = ref()
 const editRef = ref()
 const actionColumn = {
-  width: 160,
+  width: 220,
   render(row: any) {
     return h(NSpace, { align: 'center', justify: 'center' }, () => [
+      h(VTableColumnBtn, { type: 'info', onClick: () => handleAdd({ parentId: row.id }) }, () => '新增'),
       h(VTableColumnBtn, { onClick: () => handleEdit(row.id) }, () => '编辑'),
-      h(VTableColumnDeleteBtn, { delete: () => handleDelete([row.id]) }),
+      h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
     ])
   },
 }
@@ -33,8 +34,8 @@ async function load() {
   }
 }
 
-function handleAdd() {
-  unref(editRef).open()
+function handleAdd(record?: any) {
+  unref(editRef).open(record)
 }
 
 function handleEdit(id: number | string) {
@@ -72,8 +73,10 @@ function handleRefresh() {
       :scroll-x="1390"
     >
       <template #action>
-        <VTableAddBtn @click="handleAdd" />
-        <VTableBatchDeleteBtn :delete="handleBatchDelete" />
+        <VTableBtn @click="handleAdd">
+          新建
+        </VTableBtn>
+        <VTableDialogBtn :fn="handleBatchDelete" />
       </template>
     </VTable>
 

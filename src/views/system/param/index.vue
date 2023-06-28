@@ -3,7 +3,7 @@ import { NSpace, useMessage } from 'naive-ui'
 import { searchSchemas } from './schemas/search'
 import { columns } from './schemas/table'
 import Edit from './edit.vue'
-import { VTableColumnBtn, VTableColumnDeleteBtn } from '@/components/VTable'
+import { VTableColumnBtn, VTableColumnDialogBtn } from '@/components/VTable'
 import { param } from '@/apis/system/param'
 
 const message = useMessage()
@@ -15,7 +15,7 @@ const actionColumn = {
   render(row: any) {
     return h(NSpace, { align: 'center', justify: 'center' }, () => [
       h(VTableColumnBtn, { onClick: () => handleEdit(row.id) }, () => '编辑'),
-      h(VTableColumnDeleteBtn, { delete: () => handleDelete([row.id]) }),
+      h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
     ])
   },
 }
@@ -70,8 +70,10 @@ function handleRefresh() {
       :scroll-x="1010"
     >
       <template #action>
-        <VTableAddBtn @click="handleAdd" />
-        <VTableBatchDeleteBtn :delete="handleBatchDelete" />
+        <VTableBtn @click="handleAdd">
+          新 建
+        </VTableBtn>
+        <VTableDialogBtn :fn="handleBatchDelete" />
       </template>
     </VTable>
 

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { schemas } from './schemas/form'
-import { menu } from '@/apis/system/menu'
+import { dictType } from '@/apis/system/dict'
 
 const emit = defineEmits(['refresh'])
 
@@ -9,26 +8,43 @@ const modalRef = ref()
 const formRef = ref()
 const { open, close } = useModal(modalRef)
 const isEdit = ref(false)
-const title = computed(() => `${unref(isEdit) ? '编辑' : '新建'}菜单`)
+const title = computed(() => `${unref(isEdit) ? '编辑' : '新建'}字典类型`)
 const [init, toggleInit] = useToggle()
 const [loading, toggleLoading] = useToggle()
+const schemas = [
+  {
+    field: 'id',
+    show: false,
+  },
+  {
+    field: 'key',
+    label: '标识',
+    component: 'NInput',
+    rules: { required: true, message: '请输入标识', trigger: ['blur', 'input'] },
+  },
+  {
+    field: 'name',
+    label: '名称',
+    component: 'NInput',
+    rules: { required: true, message: '请输入名称', trigger: ['blur', 'input'] },
+  },
+]
 
-async function handleOpen(params: { edit?: boolean; id?: number | string; parentId?: number | string }) {
+async function handleOpen(params: { edit?: boolean; record?: any }) {
   await open()
   toggleInit(true)
   isEdit.value = params?.edit || false
   unref(formRef).init(schemas)
   if (params?.edit) {
     try {
-      const data = await menu.info({ id: params.id })
-      unref(formRef).setFieldsValue(data)
+      unref(formRef).setFieldsValue(params.record)
     }
     catch (err) {
 
     }
   }
-  else if (params?.parentId) {
-    unref(formRef).setFieldsValue({ parentId: params.parentId })
+  else if (params.record) {
+    unref(formRef).setFieldsValue({ parentId: params.record.id })
   }
   toggleInit(false)
 }
@@ -38,7 +54,7 @@ async function handleConfirm() {
     await unref(formRef).validate()
     toggleInit(true)
     toggleLoading(true)
-    await menu[unref(isEdit) ? 'update' : 'add'](unref(formRef).getFieldsValue())
+    await dictType[unref(isEdit) ? 'update' : 'add'](unref(formRef).getFieldsValue())
     message.success('保存成功')
     close()
     emit('refresh')
