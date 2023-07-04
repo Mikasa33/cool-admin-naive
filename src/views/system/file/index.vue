@@ -4,7 +4,7 @@ import { columns } from './schemas/table'
 import Edit from './edit.vue'
 import FileType from './components/FileType.vue'
 import { VTableColumnDialogBtn } from '@/components/VTable'
-import { fileInfo } from '@/apis/system/file'
+import { spaceInfo } from '@/apis/system/space'
 
 const message = useMessage()
 
@@ -23,7 +23,7 @@ const actionColumn = {
 const checkedRowKeys = computed(() => unref(tableRef)?.getCheckedRowKeys() || [])
 
 async function load(params: any) {
-  return await fileInfo.page({ ...params, classifyId: getClassifyId() })
+  return await spaceInfo.page({ ...params, classifyId: getClassifyId() })
 }
 
 function getClassifyId() {
@@ -36,7 +36,7 @@ function handleAdd() {
 
 async function handleDelete(ids: number[] | string[]) {
   try {
-    await fileInfo.delete({ ids })
+    await spaceInfo.delete({ ids })
     message.success('删除成功')
     handleRefresh()
   }
@@ -51,6 +51,19 @@ function handleBatchDelete() {
 
 function handleRefresh() {
   unref(tableRef).reload()
+}
+
+async function handleUploadFinish(file: any) {
+  try {
+    await spaceInfo.add({
+      classifyId: getClassifyId(),
+      ...file,
+    })
+    handleRefresh()
+  }
+  catch (err) {
+
+  }
 }
 </script>
 
@@ -78,9 +91,9 @@ function handleRefresh() {
           :init="false"
         >
           <template #action>
-            <VTableBtn @click="handleAdd">
-              上 传
-            </VTableBtn>
+            <VUpload
+              @finish="handleUploadFinish"
+            />
             <VTableDialogBtn :fn="handleBatchDelete" />
           </template>
         </VTable>

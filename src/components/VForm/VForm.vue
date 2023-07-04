@@ -109,9 +109,10 @@ function getComponentProps(schema: any) {
 
   const { placeholder } = componentProps
   if (!placeholder) {
-    componentProps.placeholder = `请输入${label}`
+    componentProps.placeholder = `请输入${label ?? ''}`
+
     if (['NCascader', 'NDatePicker', 'VIconSelect', 'VSelect', 'VTreeSelect'].includes(component))
-      componentProps.placeholder = `请选择${label}`
+      componentProps.placeholder = `请选择${label ?? ''}`
   }
 
   return componentProps
@@ -195,9 +196,12 @@ defineExpose({
               <template
                 v-for="(slot, key, slotIndex) in getSlots(schema, schema.componentSlots)"
                 :key="slotIndex"
-                #[key]
+                #[key]="props"
               >
-                <Component :is="slot" />
+                <Component
+                  :is="slot"
+                  v-bind="props"
+                />
               </template>
             </Component>
           </NFormItemGi>

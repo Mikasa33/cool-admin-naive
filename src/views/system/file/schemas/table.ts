@@ -15,7 +15,7 @@ export const columns = [
     align: 'center',
     width: 150,
     render(row: any) {
-      return h('div', { class: 'text-0px flex-center ' }, h(NImage, { src: row.url, objectFit: 'cover', style: { height: '50px' } }))
+      return h('div', { class: 'text-0px flex-center ' }, h(NImage, { src: row.url, objectFit: 'cover', style: { height: '40px', borderRadius: '3px' } }))
     },
   },
   {

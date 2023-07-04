@@ -1,9 +1,9 @@
 import { crud } from '@/utils/request'
 
-export const fileType = {
+export const spaceType = {
   ...crud({ namespace: '/admin/space/type' }),
 }
 
-export const fileInfo = {
+export const spaceInfo = {
   ...crud({ namespace: '/admin/space/info' }),
 }

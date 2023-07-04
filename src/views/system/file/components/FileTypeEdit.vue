@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { fileType } from '@/apis/system/file'
+import { spaceType } from '@/apis/system/space'
 
 const emit = defineEmits(['refresh'])
 
@@ -48,7 +48,7 @@ async function handleConfirm() {
     await unref(formRef).validate()
     toggleInit(true)
     toggleLoading(true)
-    await fileType[unref(isEdit) ? 'update' : 'add'](unref(formRef).getFieldsValue())
+    await spaceType[unref(isEdit) ? 'update' : 'add'](unref(formRef).getFieldsValue())
     message.success('保存成功')
     close()
     emit('refresh')

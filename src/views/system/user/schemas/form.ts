@@ -10,6 +10,19 @@ export const schemas = [
     show: false,
   },
   {
+    field: 'headImg',
+    label: '头像',
+    component: 'VUpload',
+    componentProps: {
+      listType: 'image-card',
+      max: 1,
+      accept: 'image/*',
+    },
+    giProps: {
+      span: 24,
+    },
+  },
+  {
     field: 'name',
     label: '姓名',
     component: 'NInput',
@@ -34,7 +47,7 @@ export const schemas = [
     componentProps: {
       type: 'password',
     },
-    rules: ({ model }: any) => !model.id ? {} : { required: true, message: '请输入密码', trigger: ['blur', 'input'] },
+    rules: ({ model }: any) => model.id ? {} : { required: true, message: '请输入密码', trigger: ['blur', 'input'] },
   },
   {
     field: 'roleIdList',

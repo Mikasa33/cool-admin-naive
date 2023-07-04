@@ -1,4 +1,4 @@
-import { NAvatar, NSwitch } from 'naive-ui'
+import { NImage, NSwitch } from 'naive-ui'
 import dayjs from 'dayjs'
 import { user } from '@/apis/system/user'
 
@@ -15,7 +15,7 @@ export const columns = [
     align: 'center',
     width: 80,
     render(row: any) {
-      return h('div', { class: 'text-0px flex-center ' }, h(NAvatar, { src: row.headImg, objectFit: 'cover', style: { height: '60px' } }))
+      return h('div', { class: 'text-0px flex-center ' }, h(NImage, { src: row.headImg, objectFit: 'cover', width: 40, height: 40, style: { width: '40px', height: '40px', borderRadius: '3px' } }))
     },
   },
   {

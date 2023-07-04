@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import FileTypeEdit from './FileTypeEdit.vue'
-import { fileType } from '@/apis/system/file'
+import { spaceType } from '@/apis/system/space'
 import { deepTree, revDeepTree } from '@/utils'
 
 const emit = defineEmits(['refresh'])
@@ -15,7 +15,7 @@ const selectedKeys = ref<string[] | number[]>([])
 const selectedAndChildrenKeys = ref<string[] | number[]>([])
 
 async function load(params: any) {
-  const list = await fileType.list({ order: 'createTime', sort: 'asc', ...params })
+  const list = await spaceType.list({ order: 'createTime', sort: 'asc', ...params })
   return deepTree(list)
 }
 
@@ -33,7 +33,7 @@ function handleEdit(record: any) {
 
 async function handleDelete(id: number | string) {
   try {
-    await fileType.delete({ ids: [id] })
+    await spaceType.delete({ ids: [id] })
     message.success('删除成功')
 
     await handleRefresh()

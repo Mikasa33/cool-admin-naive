@@ -12,6 +12,7 @@ export function schemas({ classifyId }: { classifyId: number }) {
     {
       component: 'VUpload',
       componentProps: {
+        showFileList: false,
       },
       itemProps: {
         labelWidth: 0,
