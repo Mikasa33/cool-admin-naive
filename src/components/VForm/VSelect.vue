@@ -2,18 +2,22 @@
 import type { SelectOption } from 'naive-ui'
 import { NSpin } from 'naive-ui'
 
-const props = defineProps<{
-  options?: SelectOption[]
+const props = withDefaults(defineProps<{
+  options: SelectOption[]
   load?: Function
-}>()
+}>(), {
+  options: () => [],
+})
 
 const [loading, toggleLoading] = useToggle()
 
 const options = ref<SelectOption[]>([])
 
 async function load() {
-  if (!props.load)
+  if (!props.load) {
+    options.value = props.options
     return
+  }
 
   try {
     toggleLoading(true)

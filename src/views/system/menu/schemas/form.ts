@@ -86,6 +86,7 @@ export const schemas = [
         model.viewPath = model.viewPath.replace(/\/views/g, '')
       },
     },
+    rules: { required: true, message: '请选择文件路径', trigger: ['blur', 'input'] },
     ifShow: ({ model }: any) => model.type === 1,
   },
   {
