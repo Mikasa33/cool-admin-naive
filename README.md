@@ -22,13 +22,13 @@
 
 账户：admin，密码：123456
 
-<img src="https://cool-show.oss-cn-shanghai.aliyuncs.com/admin/home-mini.png" alt="Admin Home" ></a>
+<img src="https://github.com/Mikasa33/cool-admin-naive/assets/29498153/778d3cb5-0d13-473f-95ea-866daca10b64" alt="Admin Home" ></a>
 
 ## 项目后端
 
 [https://github.com/cool-team-official/cool-admin-midway](https://github.com/cool-team-official/cool-admin-midway)
 
-务必要使用 sql 目录下的 sql 文件更新数据库
+***务必使用 sql 目录下的 sql 文件更新数据库***
 
 ## 安装项目依赖
 
