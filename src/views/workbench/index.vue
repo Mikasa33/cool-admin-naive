@@ -299,6 +299,10 @@ const dynamics = [
           title="创意"
           size="small"
           :bordered="false"
+          :segmented="{
+            content: true,
+            action: true,
+          }"
           class="mt-16px"
         >
           <img src="/business.svg">
