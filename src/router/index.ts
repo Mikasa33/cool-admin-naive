@@ -14,7 +14,40 @@ const router = createRouter({
       path: '/',
       redirect: '/workbench',
       component: DefaultLayout,
-      children: [],
+      children: [
+        {
+          name: '403',
+          path: '/403',
+          component: () => import('@/views/sys/exception/403.vue'),
+          meta: {
+            title: '403',
+          },
+        },
+        {
+          name: '500',
+          path: '/500',
+          component: () => import('@/views/sys/exception/500.vue'),
+          meta: {
+            title: '500',
+          },
+        },
+        {
+          name: '502',
+          path: '/502',
+          component: () => import('@/views/sys/exception/502.vue'),
+          meta: {
+            title: '502',
+          },
+        },
+        {
+          name: 'NotFound',
+          path: '/:pathMatch(.*)*',
+          component: () => import('@/views/sys/exception/404.vue'),
+          meta: {
+            title: '404',
+          },
+        },
+      ],
     },
     {
       name: 'Custom',
@@ -28,14 +61,6 @@ const router = createRouter({
           meta: {
             title: '登录',
             ignore: true,
-          },
-        },
-        {
-          name: 'NotFound',
-          path: '/:pathMatch(.*)*',
-          component: () => import('@/views/sys/exception/404.vue'),
-          meta: {
-            title: '404',
           },
         },
       ],

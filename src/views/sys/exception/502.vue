@@ -9,9 +9,9 @@ function handleClick() {
 <template>
   <div class="mt-10% flex-center">
     <NResult
-      status="404"
-      title="404"
-      description="找不到您要查找的页面"
+      status="418"
+      title="502"
+      description="马上回来"
     >
       <template #footer>
         <NButton
