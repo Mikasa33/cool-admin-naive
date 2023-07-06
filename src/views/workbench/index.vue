@@ -125,7 +125,7 @@ const dynamics = [
             object-fit="cover"
             :size="72"
           />
-          <div class="flex flex-col ml-20px">
+          <div class="ml-20px flex flex-col">
             <NH3 class="!mb-0">
               早安，{{ userInfo.nickName }}，开始您一天的工作吧！
             </NH3>
@@ -150,8 +150,10 @@ const dynamics = [
     <NGrid
       :x-gap="16"
       :y-gap="16"
+      responsive="screen"
+      item-responsive
     >
-      <NGi :span="16">
+      <NGi span="xs:24 s:24 m:16">
         <NCard
           title="项目"
           size="small"
@@ -165,11 +167,13 @@ const dynamics = [
           <NGrid
             :x-gap="8"
             :y-gap="8"
+            responsive="screen"
+            item-responsive
           >
             <NGi
               v-for="(item, index) in projects"
               :key="index"
-              :span="8"
+              span="xs:24 s:12 m:8"
             >
               <NCard
                 hoverable
@@ -191,7 +195,7 @@ const dynamics = [
                   {{ item.description }}
                 </NText>
                 <template #footer>
-                  <div class="justify-between flex-center">
+                  <div class="flex-center justify-between">
                     <NText :depth="3">
                       {{ item.team }}
                     </NText>
@@ -250,7 +254,7 @@ const dynamics = [
           </NList>
         </NCard>
       </NGi>
-      <NGi :span="8">
+      <NGi span="xs:24 s:24 m:8">
         <NCard
           title="快捷导航"
           size="small"
@@ -264,18 +268,20 @@ const dynamics = [
           <NGrid
             :x-gap="8"
             :y-gap="8"
+            responsive="screen"
+            item-responsive
           >
             <NGi
               v-for="(item, index) in navigations"
               :key="index"
-              :span="8"
+              span="xs:12 s:12 m:12 l:8"
             >
               <NCard
                 hoverable
                 size="small"
                 class="cursor-pointer"
               >
-                <div class="flex-col my-8px flex-center">
+                <div class="my-8px flex-center flex-col">
                   <div
                     :class="item.icon"
                     class="text-18px"
