@@ -8,7 +8,9 @@ import VTree from './VTree.vue'
 import VTreeSelect from './VTreeSelect.vue'
 import VUpload from './VUpload.vue'
 
-type ComponentType = 'NCascader' | 'NInput' | 'NInputNumber' | 'NSwitch' | 'NDatePicker' | 'VCheckbox' | 'VEditorWang' | 'VRadio' | 'VIconSelect' | 'VSelect' | 'VTree' | 'VTreeSelect' | 'VUpload'
+type ComponentType = 'NCascader' | 'NInput' | 'NInputNumber' | 'NSwitch' | 'NDatePicker'
+| 'VCheckbox' | 'VEditorWang' | 'VRadio' | 'VIconSelect' | 'VSelect'
+| 'VTree' | 'VTreeSelect' | 'VUpload'
 
 export const componentMap = new Map<ComponentType, Component>()
 componentMap.set('NCascader', NCascader)
