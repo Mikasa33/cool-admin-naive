@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import HeaderBreadcrumb from './HeaderBreadcrumb.vue'
 import HeaderFullscreen from './HeaderFullscreen.vue'
 import HeaderTheme from './HeaderTheme.vue'
 import HeaderUserInfo from './HeaderUserInfo.vue'
@@ -10,12 +11,6 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   height: 64,
 })
-
-const route = useRoute()
-
-const breadcrumbs = computed(() => {
-  return route.matched.filter((item: any) => item.path && !item.meta?.hideBreadcrumb)
-})
 </script>
 
 <template>
@@ -26,28 +21,11 @@ const breadcrumbs = computed(() => {
   >
     <div class="flex items-center justify-between w-full h-full">
       <div class="flex items-center px-12px">
-        <NBreadcrumb>
-          <NBreadcrumbItem
-            v-for="(breadcrumb, index) in breadcrumbs"
-            :key="index"
-            :clickable="false"
-            class="breadcrumb-item"
-          >
-            <div class="flex-center">
-              <Component
-                :is="breadcrumb.meta?.icon"
-                class="mr-4px"
-              />
-              {{ breadcrumb.meta?.title }}
-            </div>
-          </NBreadcrumbItem>
-        </NBreadcrumb>
+        <HeaderBreadcrumb />
       </div>
       <div class="flex h-full">
         <HeaderFullscreen />
-
         <HeaderTheme />
-
         <HeaderUserInfo />
       </div>
     </div>

@@ -20,7 +20,15 @@ const headerHeight = 64
         }"
       >
         <NLayoutContent :content-style="{ minHeight: `calc(100vh - ${headerHeight}px)`, backgroundColor: isDark ? '#101014' : '#f0f2f5' }">
-          <RouterView />
+          <RouterView #="{ Component }">
+            <Transition
+              name="fade-slide"
+              mode="out-in"
+              appear
+            >
+              <Component :is="Component" />
+            </Transition>
+          </RouterView>
         </NLayoutContent>
       </NLayout>
     </NLayout>

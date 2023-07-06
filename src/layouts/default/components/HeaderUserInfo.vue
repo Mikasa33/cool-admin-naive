@@ -3,6 +3,7 @@ import HeaderItem from './HeaderItem.vue'
 
 const dialog = useDialog()
 const userStore = useUserStore()
+const userInfo = computed(() => userStore.info)
 
 const options = [
   {
@@ -48,11 +49,12 @@ function handleSelect(val: any) {
   >
     <HeaderItem>
       <NAvatar
-        src="/logo.png"
+        :src="userInfo.headImg"
         round
+        object-fit="cover"
         :size="36"
       />
-      <span class="ml-8px">用户昵称</span>
+      <span class="ml-8px">{{ userInfo.nickName }}</span>
     </HeaderItem>
   </NDropdown>
 </template>
