@@ -3,7 +3,7 @@ import type { SelectOption } from 'naive-ui'
 import { NSpin } from 'naive-ui'
 
 const props = withDefaults(defineProps<{
-  options: SelectOption[]
+  options?: SelectOption[]
   load?: Function
 }>(), {
   options: () => [],
