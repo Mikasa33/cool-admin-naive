@@ -1,48 +1,47 @@
 # cool-admin-naive
 
-This template should help get you started developing with Vue 3 in Vite.
+<p align="center">
+  <a href="https://show.cool-admin.com/" target="blank"><img src="https://admin.cool-js.com/logo.png" width="200" alt="cool-admin Logo" /></a>
+</p>
 
-需要下载并运行后端项目才可以正常使用，下载地址：https://github.com/cool-team-official/cool-admin-midway ，并且要使用 sql 目录下的 sql 文件更新数据库
+<p align="center">cool-admin 一个很酷的后台权限管理系统，开源免费，模块化、插件化、极速开发 CRUD，方便快速构建迭代后台管理系统， 到<a href="https://cool-js.com" target="_blank">文档</a> 进一步了解</p>
 
-## Recommended IDE Setup
+<p align="center">
+    <a href="https://github.com/cool-team-official/cool-admin-vue/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="GitHub license" />
+    <a href=""><img src="https://img.shields.io/github/package-json/v/cool-team-official/cool-admin-vue?style=flat-square" alt="GitHub tag"></a>
+    <img src="https://img.shields.io/github/last-commit/cool-team-official/cool-admin-vue?style=flat-square" alt="GitHub tag"></a>
+</p>
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 地址
 
-## Type Support for `.vue` Imports in TS
+-   [vue3 + naive-ui + ts + vite](https://github.com/Mikasa33/cool-admin-naive)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## 演示
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+[https://show.cool-admin.com](https://show.cool-admin.com)
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+账户：admin，密码：123456
 
-## Customize configuration
+<img src="https://cool-show.oss-cn-shanghai.aliyuncs.com/admin/home-mini.png" alt="Admin Home" ></a>
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## 项目后端
 
-## Project Setup
+[https://github.com/cool-team-official/cool-admin-midway](https://github.com/cool-team-official/cool-admin-midway)
 
-```sh
-npm install
+务必要使用 sql 目录下的 sql 文件更新数据库
+
+## 安装项目依赖
+
+推荐使用 `pnpm`：
+
+```shell
+pnpm install
 ```
 
-### Compile and Hot-Reload for Development
+## 运行应用程序
 
-```sh
-npm run dev
-```
+安装过程完成后，运行以下命令启动服务。您可以在浏览器中预览网站 [http://localhost:5173](http://localhost:5173)
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+```shell
+pnpm dev
 ```
