@@ -2,7 +2,7 @@
 import { NSpace, useMessage } from 'naive-ui'
 import { searchSchemas } from './schemas/search'
 import { columns } from './schemas/table'
-import { user } from '@/apis/user'
+import { user } from '@/apis/user/user'
 import { VTableColumnDialogBtn } from '@/components/VTable'
 
 const message = useMessage()

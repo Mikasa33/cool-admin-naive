@@ -10,8 +10,8 @@ import { useTableTools } from './hooks/useTableTools'
 
 export interface Props {
   rowKey?: string
-  columns?: DataTableColumn[]
-  actionColumn?: DataTableColumn
+  columns?: DataTableColumn[] | any
+  actionColumn?: DataTableColumn | any
   useSearch?: boolean
   searchGiProps?: FormItemGiProps
   searchSchemas?: Array<any>

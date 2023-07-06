@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import FileTypeEdit from './FileTypeEdit.vue'
-import { spaceType } from '@/apis/system/space'
+import { spaceType } from '@/apis/space/space'
 import { deepTree, revDeepTree } from '@/utils'
 
 const emit = defineEmits(['refresh'])

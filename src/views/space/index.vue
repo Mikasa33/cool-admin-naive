@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { NSpace, useMessage } from 'naive-ui'
 import { columns } from './schemas/table'
-import Edit from './edit.vue'
 import FileType from './components/FileType.vue'
 import { VTableColumnDialogBtn } from '@/components/VTable'
-import { spaceInfo } from '@/apis/system/space'
+import { spaceInfo } from '@/apis/space/space'
 
 const message = useMessage()
 
 const fileTypeRef = ref()
 const tableRef = ref()
-const editRef = ref()
 const actionColumn = {
   width: 100,
   render(row: any) {
@@ -28,10 +26,6 @@ async function load(params: any) {
 
 function getClassifyId() {
   return Number(unref(fileTypeRef).getIds()?.toString())
-}
-
-function handleAdd() {
-  unref(editRef).open({ classifyId: getClassifyId() })
 }
 
 async function handleDelete(ids: number[] | string[]) {
@@ -99,10 +93,5 @@ async function handleUploadFinish(file: any) {
         </VTable>
       </NGi>
     </NGrid>
-
-    <Edit
-      ref="editRef"
-      @refresh="handleRefresh"
-    />
   </div>
 </template>

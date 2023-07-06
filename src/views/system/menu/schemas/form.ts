@@ -46,6 +46,11 @@ export const schemas = [
         return deepTree(list.filter((item: any) => item.type !== 2))
       },
     },
+    hook: {
+      set: ({ model }: any) => {
+        model.parentId = model.parentId ? Number(model.parentId) : null
+      },
+    },
   },
   {
     field: 'router',

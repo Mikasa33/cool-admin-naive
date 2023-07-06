@@ -1,5 +1,5 @@
 export function useHeight(elRef: any) {
-  const { width, height: winHeight } = useWindowSize()
+  const { height: winHeight } = useWindowSize()
 
   const height = ref<number>(0)
 
@@ -12,16 +12,26 @@ export function useHeight(elRef: any) {
     height.value = bottomIncludeBody - (paddingH + 4)
   }
 
-  watch(
-    [width, winHeight],
-    async () => {
-      await nextTick()
-      setTableHeight()
-    },
-    {
-      immediate: true,
-    },
-  )
+  // watch(
+  //   [width, winHeight],
+  //   async () => {
+  //     await nextTick()
+  //     setTableHeight()
+  //   },
+  //   {
+  //     immediate: true,
+  //   },
+  // )
+
+  const debouncedFn = useDebounceFn(() => {
+    setTableHeight()
+  }, 100)
+
+  window.addEventListener('resize', debouncedFn)
+
+  onMounted(() => {
+    debouncedFn()
+  })
 
   return {
     height,
