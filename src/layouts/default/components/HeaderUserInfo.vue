@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeaderItem from './HeaderItem.vue'
 
+const router = useRouter()
 const dialog = useDialog()
 const userStore = useUserStore()
 const userInfo = computed(() => userStore.info)
@@ -24,6 +25,7 @@ const options = [
 function handleSelect(val: any) {
   switch (val) {
     case 'user-setting':
+      router.push('/setting/user')
       break
     case 'logout':
       dialog.warning({

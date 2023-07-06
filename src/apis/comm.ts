@@ -4,6 +4,10 @@ export function getPerson() {
   return get('/admin/base/comm/person')
 }
 
+export function updatePerson(data: any) {
+  return post('/admin/base/comm/personUpdate', { data })
+}
+
 export function listPermmenu() {
   return get('/admin/base/comm/permmenu')
 }
