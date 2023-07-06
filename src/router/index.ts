@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DefaultLayout from '@/layouts/default/index.vue'
 import CustomLayout from '@/layouts/custom/index.vue'
 import storage from '@/utils/storage'
+import { renderIcon } from '@/utils/icon'
 
 const { loadingBar } = useDiscreteApi()
 
@@ -14,7 +15,19 @@ const router = createRouter({
       path: '/',
       redirect: '/workbench',
       component: DefaultLayout,
+      meta: {
+        hideBreadcrumb: true,
+      },
       children: [
+        {
+          name: 'SettingUser',
+          path: '/setting/user',
+          component: () => import('@/views/setting/user.vue'),
+          meta: {
+            icon: renderIcon('i-icon-park-outline-setting-one'),
+            title: '个人设置',
+          },
+        },
         {
           name: '403',
           path: '/403',

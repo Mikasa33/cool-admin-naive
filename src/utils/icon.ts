@@ -17,6 +17,7 @@ export const icons = [
   'i-icon-park-outline-delete-one',
   'i-icon-park-outline-file-settings-one',
   'i-icon-park-outline-workbench',
+  'i-icon-park-outline-setting-one',
 ]
 
 export function renderIcon(icon: string) {
