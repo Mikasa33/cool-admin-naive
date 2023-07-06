@@ -47,6 +47,9 @@ watch(
       }]
     }
   },
+  {
+    immediate: true,
+  },
 )
 
 const showFileList = computed(() => props.listType === 'image-card' ? true : props.showFileList ? !!unref(list).length : false)
