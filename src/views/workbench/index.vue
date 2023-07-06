@@ -88,17 +88,17 @@ const navigations = [
 const dynamics = [
   {
     icon: 'i-streamline-emojis:boar-1',
-    title: 'Ah Jung 刚才把工作台页面随便写了一些，凑合能看了！',
+    title: '管理员刚才把工作台页面随便写了一些，凑合能看了！',
     datetime: '2021-07-04 22:37:16',
   },
   {
     icon: 'i-streamline-emojis:dog-face',
-    title: 'Ah Jung 在 开源组 创建了项目 naive-ui-admin？',
+    title: '管理员在 开源组 创建了项目 cool-admin-naive？',
     datetime: '2021-07-04 22:37:16',
   },
   {
     icon: 'i-streamline-emojis:bird-1',
-    title: '@风清扬，向naive-ui-admin提交了一个bug，抽时间看看吧！',
+    title: '向 cool-admin-naive 提交了一个bug，抽时间看看吧！',
     datetime: '2021-07-04 22:37:16',
   },
   {
