@@ -47,7 +47,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/dev/': {
-        target: 'http://localhost:8001',
+        target: 'http://localhost:9103',
         changeOrigin: true,
         rewrite: (path: string) => path.replace(/^\/dev/, ''),
       },
