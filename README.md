@@ -18,7 +18,7 @@
 
 ## 演示
 
-[https://show.cool-admin.com](https://show.cool-admin.com)
+[http://cool.mikasa.cc](http://cool.mikasa.cc)
 
 账户：admin，密码：123456
 
