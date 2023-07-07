@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { icons, renderIcon } from '@/utils/icon'
+import icons from '../VIcon/icons'
+import { renderIcon } from '@/utils/icon'
 
 defineProps<{
   value?: string
@@ -11,6 +12,20 @@ const inputRef = ref()
 const { width } = useElementSize(inputRef)
 const popoverWidth = computed(() => `${unref(width)}px`)
 const [show, toggleShow] = useToggle()
+const keyword = ref('')
+const filterIcons = computed(() => icons.filter((item: any) => item.includes(unref(keyword))))
+const pagination: any = reactive({
+  page: 1,
+  total: computed(() => Math.ceil(unref(filterIcons).length / 20)),
+  data: computed(() => unref(filterIcons).slice((pagination.page - 1) * 20, pagination.page * 20)),
+})
+
+watch(
+  keyword,
+  () => {
+    pagination.page = 1
+  },
+)
 
 function handleChoose(icon: string) {
   emit('update:value', icon)
@@ -42,30 +57,55 @@ onUnmounted(() => {
       />
     </template>
 
-    <NGrid
-      :x-gap="8"
-      :y-gap="8"
-      cols="2 400:4 640:8 1024:12 1280:12 1536:16 1920:24"
-    >
-      <NGi
-        v-for="(icon, index) in icons"
-        :key="index"
-      >
-        <NButton
-          :type="value === icon ? 'primary' : 'default'"
-          secondary
-          class="!w-full"
-          @click="handleChoose(icon)"
+    <div class="my-8px">
+      <NInput
+        v-model:value="keyword"
+        placeholder="搜索图标"
+        clearable
+        class="mb-8px"
+      />
+      <NScrollbar :style="{ height: '202px' }">
+        <div v-show="filterIcons.length">
+          <NGrid
+            :x-gap="8"
+            :y-gap="8"
+            cols="2 400:4 640:8 1024:12 1280:12 1536:16 1920:24"
+          >
+            <NGi
+              v-for="(icon, index) in pagination.data"
+              :key="index"
+            >
+              <NButton
+                :type="value === icon ? 'primary' : 'default'"
+                secondary
+                class="!w-full"
+                @click="handleChoose(icon)"
+              >
+                <template #icon>
+                  <Component
+                    :is="renderIcon(icon)"
+                    class="text-16px"
+                  />
+                </template>
+              </NButton>
+            </NGi>
+          </NGrid>
+        </div>
+        <div
+          v-show="!filterIcons.length"
+          class="h-202px flex-center"
         >
-          <template #icon>
-            <Component
-              :is="renderIcon(icon)"
-              class="text-16px"
-            />
-          </template>
-        </NButton>
-      </NGi>
-    </NGrid>
+          <NEmpty />
+        </div>
+      </NScrollbar>
+      <NPagination
+        v-model:page="pagination.page"
+        :page-count="pagination.total"
+        :page-size="20"
+        simple
+        class="flex justify-end mt-8px"
+      />
+    </div>
   </NPopover>
 </template>
 
