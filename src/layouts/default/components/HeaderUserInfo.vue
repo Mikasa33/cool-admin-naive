@@ -51,12 +51,12 @@ function handleSelect(val: any) {
   >
     <HeaderItem>
       <NAvatar
-        :src="userInfo.headImg"
+        :src="userInfo?.headImg"
         round
         object-fit="cover"
         :size="36"
       />
-      <span class="ml-8px">{{ userInfo.nickName }}</span>
+      <span class="ml-8px">{{ userInfo?.nickName }}</span>
     </HeaderItem>
   </NDropdown>
 </template>

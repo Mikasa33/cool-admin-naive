@@ -120,14 +120,14 @@ const dynamics = [
       <div class="flex justify-between">
         <div class="flex items-center">
           <NAvatar
-            :src="userInfo.headImg"
+            :src="userInfo?.headImg"
             round
             object-fit="cover"
             :size="72"
           />
-          <div class="ml-20px flex flex-col">
+          <div class="flex flex-col ml-20px">
             <NH3 class="!mb-0">
-              早安，{{ userInfo.nickName }}，开始您一天的工作吧！
+              早安，{{ userInfo?.nickName }}，开始您一天的工作吧！
             </NH3>
             <NText :depth="3" class="mt-4px">
               今日晴，20℃ - 32℃！
@@ -195,7 +195,7 @@ const dynamics = [
                   {{ item.description }}
                 </NText>
                 <template #footer>
-                  <div class="flex-center justify-between">
+                  <div class="justify-between flex-center">
                     <NText :depth="3">
                       {{ item.team }}
                     </NText>
@@ -281,7 +281,7 @@ const dynamics = [
                 size="small"
                 class="cursor-pointer"
               >
-                <div class="my-8px flex-center flex-col">
+                <div class="flex-col my-8px flex-center">
                   <div
                     :class="item.icon"
                     class="text-18px"
