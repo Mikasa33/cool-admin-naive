@@ -5,6 +5,7 @@ import { revDeepTree } from '@/utils'
 export interface Props {
   title?: string
   selectedKeys?: string[] | number[]
+  draggable?: boolean
   load: Function
   delete: Function
   isAdd?: boolean
@@ -15,6 +16,7 @@ export interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   selectedKeys: () => [],
+  draggable: false,
   isAdd: false,
   isUpdate: true,
   isDelete: true,
@@ -272,6 +274,7 @@ defineExpose({
         :data="data"
         :node-props="nodeProps"
         :show-irrelevant-nodes="false"
+        :draggable="draggable && (permission ? hasPermission([`${permission}:update`]) : false)"
         selectable
         block-line
         class="tree"
