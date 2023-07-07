@@ -146,7 +146,7 @@ function handleRemove({ file, fileList }: { file: UploadFileInfo; fileList: Uplo
     :show-file-list="showFileList"
     :custom-request="customRequest"
     :list-type="listType"
-    :file-list-style="listType === 'image-card' ? null : { padding: '8px', border: '1px solid rgb(239, 239, 245)', borderRadius: '3px' }"
+    :file-list-style="listType === 'image-card' ? undefined : { padding: '8px', border: '1px solid rgb(239, 239, 245)', borderRadius: '3px' }"
     @before-upload="handleBeforeUpload"
     @remove="handleRemove"
   >

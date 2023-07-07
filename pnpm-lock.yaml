@@ -70,6 +70,9 @@ devDependencies:
   '@types/node':
     specifier: ^18.16.17
     version: 18.16.17
+  '@types/store':
+    specifier: ^2.0.2
+    version: 2.0.2
   '@unocss/eslint-config':
     specifier: ^0.53.1
     version: 0.53.1(eslint@8.39.0)(typescript@5.0.4)
@@ -963,6 +966,10 @@ packages:
 
   /@types/semver@7.5.0:
     resolution: {integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==}
+    dev: true
+
+  /@types/store@2.0.2:
+    resolution: {integrity: sha512-ZPHnXkzmGMfk+pHqAGzTSpA9CbsHmJLgkvOl5w52LZ0XTxB1ZIHWZzQ7lEtjTNWScBbsQekg8TjApMXkMe4nkw==}
     dev: true
 
   /@types/unist@2.0.6:

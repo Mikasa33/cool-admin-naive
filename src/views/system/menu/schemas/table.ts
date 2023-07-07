@@ -40,7 +40,7 @@ export const columns = [
       if (!find)
         return
 
-      return find ? h(NTag, { type: find.type, bordered: false }, () => find.label) : null
+      return find ? h(NTag, { type: find.type as TagType, bordered: false }, () => find.label) : null
     },
   },
   {

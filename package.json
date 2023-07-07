@@ -34,6 +34,7 @@
     "@tsconfig/node18": "^2.0.1",
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^18.16.17",
+    "@types/store": "^2.0.2",
     "@unocss/eslint-config": "^0.53.1",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",

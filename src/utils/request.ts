@@ -1,6 +1,5 @@
 import axios, { type AxiosRequestConfig } from 'axios'
 import { endsWith, isUndefined } from 'lodash-es'
-import type { MessageType } from 'naive-ui'
 import storage from './storage'
 import router from '@/router'
 
@@ -14,12 +13,12 @@ let queue: Array<(token: string) => void> = []
 // 是否刷新中
 let isRefreshing = false
 
-function showMessage(msg: string, type?: MessageType) {
+function showMessage(msg: string, type?: 'info' | 'success' | 'warning' | 'error' | 'loading') {
   const { message } = useDiscreteApi()
   message[type || 'error'](msg)
 }
 
-function isShowMessage(config: axiosRequestConfigPro, msg: string, type?: MessageType) {
+function isShowMessage(config: axiosRequestConfigPro, msg: string, type?: 'info' | 'success' | 'warning' | 'error' | 'loading') {
   if (config?.showMessage || isUndefined(config?.showMessage))
     showMessage(msg, type)
 }

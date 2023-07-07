@@ -32,7 +32,7 @@ export const columns = [
       if (!find)
         return
 
-      return h(NTag, { type: find.type, bordered: false }, () => find.label)
+      return h(NTag, { type: find.type as TagType, bordered: false }, () => find.label)
     },
   },
   {
