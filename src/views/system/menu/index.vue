@@ -7,6 +7,7 @@ import { deepTree } from '@/utils'
 import { menu } from '@/apis/system/menu'
 
 const message = useMessage()
+const { hasPermission } = usePermission()
 
 const tableRef = ref()
 const editRef = ref()
@@ -14,9 +15,9 @@ const actionColumn = {
   width: 220,
   render(row: any) {
     return h(NSpace, { align: 'center', justify: 'center' }, () => [
-      h(VTableColumnBtn, { type: 'info', onClick: () => handleAdd({ parentId: row.id }) }, () => '新增'),
-      h(VTableColumnBtn, { onClick: () => handleEdit(row.id) }, () => '编辑'),
-      h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
+      row.type !== 2 && hasPermission(['base:sys:menu:add']) && h(VTableColumnBtn, { type: 'info', onClick: () => handleAdd({ parentId: row.id }) }, () => '新增'),
+      hasPermission(['base:sys:menu:update']) && h(VTableColumnBtn, { onClick: () => handleEdit(row.id) }, () => '编辑'),
+      hasPermission(['base:sys:menu:delete']) && h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
     ])
   },
 }
@@ -73,10 +74,16 @@ function handleRefresh() {
       :scroll-x="1390"
     >
       <template #action>
-        <VTableBtn @click="handleAdd">
+        <VTableBtn
+          v-permission="['base:sys:menu:add']"
+          @click="handleAdd"
+        >
           新建
         </VTableBtn>
-        <VTableDialogBtn :fn="handleBatchDelete" />
+        <VTableDialogBtn
+          v-permission="['base:sys:menu:delete']"
+          :fn="handleBatchDelete"
+        />
       </template>
     </VTable>
 

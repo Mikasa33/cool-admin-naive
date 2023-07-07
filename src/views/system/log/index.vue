@@ -72,12 +72,14 @@ onMounted(async () => {
     >
       <template #action>
         <VTableBtn
+          v-permission="['base:sys:log:clear']"
           type="error"
           @click="handleClear"
         >
           清 空
         </VTableBtn>
         <NForm
+          v-permission="['base:sys:log:getKeep', 'base:sys:log:setKeep']"
           label-placement="left"
           :show-feedback="false"
         >

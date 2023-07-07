@@ -4,7 +4,10 @@ export function useHeight(elRef: any) {
   const height = ref<number>(0)
 
   function setTableHeight() {
-    const el = elRef.value.$el
+    const el = elRef?.value?.$el
+    if (!el)
+      return
+
     const headEl = el.querySelector('.n-data-table-thead')
     const { top } = useElementBounding(headEl)
     const bottomIncludeBody = unref(winHeight) - unref(top)

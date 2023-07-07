@@ -6,6 +6,7 @@ import { deepTree, revDeepTree } from '@/utils'
 const emit = defineEmits(['refresh'])
 
 const message = useMessage()
+const { hasPermission } = usePermission()
 
 const treeRef = ref()
 const editRef = ref()
@@ -99,6 +100,7 @@ defineExpose({
       default-expand-all
       draggable
       is-add
+      permission="base:sys:department"
       :load="load"
       :delete="handleDelete"
       @add="handleAdd"

@@ -108,9 +108,9 @@ defineExpose({
           align="center"
           justify="space-between"
         >
-          <NSpace align="center">
+          <div class="flex items-center actions">
             <slot name="action" />
-          </NSpace>
+          </div>
           <VTableTools
             v-if="useTools"
             v-model:columns="defaultColumns"
@@ -143,3 +143,11 @@ defineExpose({
     </NCard>
   </div>
 </template>
+
+<style lang="less" scoped>
+.actions {
+  :deep(.n-button) {
+    margin-right: 12px;
+  }
+}
+</style>

@@ -113,15 +113,15 @@ export const schemas = [
   {
     field: 'perms',
     label: '权限',
-    component: 'NCascader',
-    componentProps: ({ model }: any) => ({
-      options: [],
-      // checkStrategy: 'child',
-      // onUpdateValue: async (val: string) => {
-      //   await nextTick()
-      //   model.viewPath = `/views${val}`
-      // },
-    }),
+    component: 'NDynamicTags',
+    hook: {
+      get: ({ model }: any) => {
+        model.perms = model.perms?.toString()
+      },
+      set: ({ model }: any) => {
+        model.perms = model.perms?.split(',')
+      },
+    },
     ifShow: ({ model }: any) => model.type === 2,
   },
 ]

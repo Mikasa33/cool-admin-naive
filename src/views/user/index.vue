@@ -6,13 +6,14 @@ import { user } from '@/apis/user/user'
 import { VTableColumnDialogBtn } from '@/components/VTable'
 
 const message = useMessage()
+const { hasPermission } = usePermission()
 
 const tableRef = ref()
 const actionColumn = {
   width: 100,
   render(row: any) {
     return h(NSpace, { align: 'center', justify: 'center' }, () => [
-      h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
+      hasPermission(['user:info:delete']) && h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
     ])
   },
 }
@@ -59,7 +60,10 @@ function handleBatchDelete() {
       :scroll-x="970"
     >
       <template #action>
-        <VTableDialogBtn :fn="handleBatchDelete" />
+        <VTableDialogBtn
+          v-permission="['user:info:delete']"
+          :fn="handleBatchDelete"
+        />
       </template>
     </VTable>
   </div>

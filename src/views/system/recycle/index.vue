@@ -6,13 +6,14 @@ import { recycle } from '@/apis/system/recycle'
 import { VTableColumnBtn } from '@/components/VTable'
 
 const message = useMessage()
+const { hasPermission } = usePermission()
 
 const tableRef = ref()
 const actionColumn = {
   width: 100,
   render(row: any) {
     return h(NSpace, { align: 'center', justify: 'center' }, () => [
-      h(VTableColumnBtn, { onClick: () => handleRestore([row.id]) }, () => '恢复'),
+      hasPermission(['recycle:data:restore']) && h(VTableColumnBtn, { onClick: () => handleRestore([row.id]) }, () => '恢复'),
     ])
   },
 }
@@ -60,6 +61,7 @@ function handleBatchRestore() {
     >
       <template #action>
         <VTableDialogBtn
+          v-permission="['recycle:data:restore']"
           type="primary"
           :disabled="!checkedRowKeys.length"
           :fn="handleBatchRestore"

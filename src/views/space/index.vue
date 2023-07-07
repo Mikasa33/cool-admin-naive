@@ -6,6 +6,7 @@ import { VTableColumnDialogBtn } from '@/components/VTable'
 import { spaceInfo } from '@/apis/space/space'
 
 const message = useMessage()
+const { hasPermission } = usePermission()
 
 const fileTypeRef = ref()
 const tableRef = ref()
@@ -13,7 +14,7 @@ const actionColumn = {
   width: 100,
   render(row: any) {
     return h(NSpace, { align: 'center', justify: 'center' }, () => [
-      h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
+      hasPermission(['space:info:delete']) && h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
     ])
   },
 }
@@ -86,9 +87,13 @@ async function handleUploadFinish(file: any) {
         >
           <template #action>
             <VUpload
+              v-permission="['space:info:add']"
               @finish="handleUploadFinish"
             />
-            <VTableDialogBtn :fn="handleBatchDelete" />
+            <VTableDialogBtn
+              v-permission="['space:info:delete']"
+              :fn="handleBatchDelete"
+            />
           </template>
         </VTable>
       </NGi>

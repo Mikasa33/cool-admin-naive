@@ -3,6 +3,7 @@ import DefaultLayout from '@/layouts/default/index.vue'
 import { listPermmenu } from '@/apis/comm'
 import { deepTree } from '@/utils'
 import { renderIcon } from '@/utils/icon'
+import storage from '@/utils/storage'
 
 enum MenuType {
   '目录' = 0,
@@ -13,12 +14,20 @@ enum MenuType {
 let layouts: any
 let views: any
 
+const data = storage.info()
+
 export const useMenuStore = defineStore('menu', () => {
   const isDynamicAddedRoute = ref(false)
   const list = ref<any[]>([])
+  const permissions = ref<any[]>(data.permissions || [])
 
   function setDynamicAddedRoute(val: boolean) {
     isDynamicAddedRoute.value = val
+  }
+
+  function setPermissions(list: any[]) {
+    permissions.value = list
+    storage.set('permissions', list)
   }
 
   function transformObjToMenu(routes: any[]) {
@@ -114,7 +123,9 @@ export const useMenuStore = defineStore('menu', () => {
       duration: 0,
     })
 
-    const { menus } = await listPermmenu()
+    const { menus, perms } = await listPermmenu()
+
+    setPermissions(perms || [])
 
     list.value = transformObjToMenu(menus.filter((menu: any) => menu.type !== 2))
 
@@ -128,6 +139,7 @@ export const useMenuStore = defineStore('menu', () => {
   return {
     isDynamicAddedRoute,
     list,
+    permissions,
     setDynamicAddedRoute,
     getRoutes,
   }

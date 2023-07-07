@@ -9,6 +9,7 @@ import { VTableColumnBtn, VTableColumnDialogBtn } from '@/components/VTable'
 import { user } from '@/apis/system/user'
 
 const message = useMessage()
+const { hasPermission } = usePermission()
 
 const tableRef = ref()
 const editRef = ref()
@@ -18,9 +19,9 @@ const actionColumn = {
   width: 220,
   render(row: any) {
     return h(NSpace, { align: 'center', justify: 'center' }, () => [
-      h(VTableColumnBtn, { type: 'info', onClick: () => handleTransfer([row.id]) }, () => '转移'),
-      h(VTableColumnBtn, { onClick: () => handleEdit(row.id) }, () => '编辑'),
-      h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
+      hasPermission(['base:sys:user:move']) && h(VTableColumnBtn, { type: 'info', onClick: () => handleTransfer([row.id]) }, () => '转移'),
+      hasPermission(['base:sys:user:update']) && h(VTableColumnBtn, { onClick: () => handleEdit(row.id) }, () => '编辑'),
+      hasPermission(['base:sys:user:delete']) && h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
     ])
   },
 }
@@ -97,11 +98,18 @@ function handleRefresh() {
           :init="false"
         >
           <template #action>
-            <VTableBtn @click="handleAdd">
+            <VTableBtn
+              v-permission="['base:sys:user:add']"
+              click="handleAdd"
+            >
               新 建
             </VTableBtn>
-            <VTableDialogBtn :fn="handleBatchDelete" />
+            <VTableDialogBtn
+              v-permission="['base:sys:user:delete']"
+              :fn="handleBatchDelete"
+            />
             <NButton
+              v-permission="['base:sys:user:move']"
               type="warning"
               :disabled="!checkedRowKeys.length"
               @click="handleBatchTransfer"

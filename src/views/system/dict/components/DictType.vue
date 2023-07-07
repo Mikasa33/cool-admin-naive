@@ -81,6 +81,7 @@ defineExpose({
       key-field="id"
       label-field="name"
       default-expand-all
+      permission="dict:type"
       :load="load"
       :delete="handleDelete"
       @add="handleAdd"

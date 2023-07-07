@@ -27,7 +27,7 @@ function init(scs: any[]) {
   model.value = {}
   unref(schemas)?.forEach((schema: any) => {
     if (schema.field)
-      model.value[schema.field] = schema.defaultValue ?? null
+      model.value[schema.field] = schema.defaultValue ?? (schema.component === 'NDynamicTags' ? [] : null)
   })
 }
 
@@ -69,7 +69,10 @@ function setFieldsValue(val: any) {
   for (const key in val) {
     const schema = unref(schemas).find((schema: any) => schema.field === key)
 
-    if (!schema || !getProp(schema, schema.ifShow, true))
+    // if (!schema || !getProp(schema, schema.ifShow, true))
+    //   continue
+
+    if (!schema)
       continue
 
     if (schema?.hook?.set)

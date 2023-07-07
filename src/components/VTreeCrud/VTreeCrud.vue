@@ -8,16 +8,23 @@ export interface Props {
   load: Function
   delete: Function
   isAdd?: boolean
+  isUpdate?: boolean
+  isDelete?: boolean
+  permission?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   selectedKeys: () => [],
+  isAdd: false,
+  isUpdate: true,
+  isDelete: true,
 })
 
 const emit = defineEmits(['update:selected-keys', 'add', 'edit', 'drop'])
 
 const attrs = useAttrs()
 const dialog = useDialog()
+const { hasPermission } = usePermission()
 
 const keyField = computed(() => attrs['key-field'] as string)
 const pattern = ref('')
@@ -28,6 +35,10 @@ const [loading, toggleLoading] = useToggle()
 async function load() {
   try {
     toggleLoading(true)
+
+    if (props.permission && !hasPermission([`${props.permission}:list`]))
+      return
+
     data.value = await props.load()
 
     if (!props.selectedKeys.length && data.value.length) {
@@ -52,23 +63,27 @@ const dropdown = reactive<any>({
   x: 0,
   y: 0,
   options: computed(() => {
-    const options = [
-      {
-        key: 'edit',
-        label: '编辑',
-        icon: () => h('div', { class: 'i-icon-park-outline-edit' }),
-      },
-      {
-        key: 'delete',
-        label: '删除',
-        icon: () => h('div', { class: 'i-icon-park-outline-delete' }),
-      },
-    ]
-    if (props.isAdd) {
-      options.unshift({
+    const options = []
+
+    if (props.isAdd && props.permission && hasPermission([`${props.permission}:add`])) {
+      options.push({
         key: 'add',
         label: '新建',
         icon: () => h('div', { class: 'i-icon-park-outline-plus' }),
+      })
+    }
+    if (props.isUpdate && props.permission && hasPermission([`${props.permission}:update`])) {
+      options.push({
+        key: 'edit',
+        label: '编辑',
+        icon: () => h('div', { class: 'i-icon-park-outline-edit' }),
+      })
+    }
+    if (props.isDelete && props.permission && hasPermission([`${props.permission}:delete`])) {
+      options.push({
+        key: 'delete',
+        label: '删除',
+        icon: () => h('div', { class: 'i-icon-park-outline-delete' }),
       })
     }
 
@@ -213,7 +228,7 @@ defineExpose({
           <NTooltip trigger="hover">
             <template #trigger>
               <div
-                class="mr-8px h-24px w-24px flex-center cursor-pointer rounded-3px text-15px transition-base hover:bg-[rgba(0,0,0,0.09)]"
+                class="h-24px w-24px flex-center cursor-pointer rounded-3px text-15px transition-base hover:bg-[rgba(0,0,0,0.09)]"
                 @click="load"
               >
                 <div class="i-icon-park-outline-refresh" />
@@ -221,10 +236,13 @@ defineExpose({
             </template>
             刷新
           </NTooltip>
-          <NTooltip trigger="hover">
+          <NTooltip
+            v-if="permission && hasPermission([`${permission}:add`])"
+            trigger="hover"
+          >
             <template #trigger>
               <div
-                class="h-24px w-24px flex-center cursor-pointer rounded-3px text-18px transition-base hover:bg-[rgba(0,0,0,0.09)]"
+                class="ml-8px h-24px w-24px flex-center cursor-pointer rounded-3px text-18px transition-base hover:bg-[rgba(0,0,0,0.09)]"
                 @click="handleAdd"
               >
                 <div class="i-icon-park-outline-plus" />

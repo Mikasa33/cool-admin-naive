@@ -7,6 +7,7 @@ import { VTableColumnBtn, VTableColumnDialogBtn } from '@/components/VTable'
 import { role } from '@/apis/system/role'
 
 const message = useMessage()
+const { hasPermission } = usePermission()
 
 const tableRef = ref()
 const editRef = ref()
@@ -14,8 +15,8 @@ const actionColumn = {
   width: 160,
   render(row: any) {
     return h(NSpace, { align: 'center', justify: 'center' }, () => [
-      h(VTableColumnBtn, { onClick: () => handleEdit(row.id) }, () => '编辑'),
-      h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
+      hasPermission(['base:sys:role:update']) && h(VTableColumnBtn, { onClick: () => handleEdit(row.id) }, () => '编辑'),
+      hasPermission(['base:sys:role:delete']) && h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
     ])
   },
 }
@@ -70,10 +71,16 @@ function handleRefresh() {
       :scroll-x="1170"
     >
       <template #action>
-        <VTableBtn @click="handleAdd">
+        <VTableBtn
+          v-permission="['base:sys:role:add']"
+          @click="handleAdd"
+        >
           新 建
         </VTableBtn>
-        <VTableDialogBtn :fn="handleBatchDelete" />
+        <VTableDialogBtn
+          v-permission="['base:sys:role:delete']"
+          :fn="handleBatchDelete"
+        />
       </template>
     </VTable>
 

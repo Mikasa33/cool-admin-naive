@@ -51,7 +51,7 @@ onMounted(() => {
 
 <template>
   <div class="h-100vh flex-center">
-    <ThemeIcon class="absolute cursor-pointer right-32px top-32px" />
+    <VThemeIcon class="absolute cursor-pointer right-32px top-32px" />
 
     <NGrid
       item-responsive

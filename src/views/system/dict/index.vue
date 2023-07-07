@@ -10,6 +10,7 @@ import { dictInfo } from '@/apis/system/dict'
 import { deepTree } from '@/utils'
 
 const message = useMessage()
+const { hasPermission } = usePermission()
 
 const dictTypeRef = ref()
 const tableRef = ref()
@@ -18,9 +19,9 @@ const actionColumn = {
   width: 220,
   render(row: any) {
     return h(NSpace, { align: 'center', justify: 'center' }, () => [
-      h(VTableColumnBtn, { type: 'info', onClick: () => handleAdd({ parentId: row.id }) }, () => '新增'),
-      h(VTableColumnBtn, { onClick: () => handleEdit(row.id) }, () => '编辑'),
-      h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
+      hasPermission(['dict:info:add']) && h(VTableColumnBtn, { type: 'info', onClick: () => handleAdd({ parentId: row.id }) }, () => '新增'),
+      hasPermission(['dict:info:update']) && h(VTableColumnBtn, { onClick: () => handleEdit(row.id) }, () => '编辑'),
+      hasPermission(['dict:info:delete']) && h(VTableColumnDialogBtn, { fn: () => handleDelete([row.id]) }),
     ])
   },
 }
@@ -97,10 +98,16 @@ function handleRefresh() {
           :init="false"
         >
           <template #action>
-            <VTableBtn @click="handleAdd">
+            <VTableBtn
+              v-permission="['dict:info:add']"
+              @click="handleAdd"
+            >
               新 建
             </VTableBtn>
-            <VTableDialogBtn :fn="handleBatchDelete" />
+            <VTableDialogBtn
+              v-permission="['dict:info:delete']"
+              :fn="handleBatchDelete"
+            />
           </template>
         </VTable>
       </NGi>
