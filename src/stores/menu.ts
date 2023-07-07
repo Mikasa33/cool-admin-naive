@@ -68,6 +68,7 @@ export const useMenuStore = defineStore('menu', () => {
       const meta = {
         title,
         icon,
+        dynamic: true,
       }
 
       children = children?.length ? transformObjToRoute(children) : []

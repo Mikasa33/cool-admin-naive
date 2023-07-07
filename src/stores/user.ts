@@ -48,10 +48,20 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function clear() {
+    const menuStore = useMenuStore()
+
     storage.remove('token')
     storage.remove('userInfo')
     token.value = ''
     info.value = null
+    menuStore.setDynamicAddedRoute(false)
+
+    const rs = router.getRoutes()
+
+    rs.forEach((e) => {
+      if (e.name && e.meta?.dynamic)
+        router.removeRoute(e.name)
+    })
   }
 
   function logout() {

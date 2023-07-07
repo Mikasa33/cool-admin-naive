@@ -34,6 +34,7 @@ const router = createRouter({
           component: () => import('@/views/sys/exception/403.vue'),
           meta: {
             title: '403',
+            hideBreadcrumb: true,
           },
         },
         {
@@ -42,6 +43,7 @@ const router = createRouter({
           component: () => import('@/views/sys/exception/500.vue'),
           meta: {
             title: '500',
+            hideBreadcrumb: true,
           },
         },
         {
@@ -50,6 +52,7 @@ const router = createRouter({
           component: () => import('@/views/sys/exception/502.vue'),
           meta: {
             title: '502',
+            hideBreadcrumb: true,
           },
         },
         {
@@ -58,6 +61,7 @@ const router = createRouter({
           component: () => import('@/views/sys/exception/404.vue'),
           meta: {
             title: '404',
+            hideBreadcrumb: true,
           },
         },
       ],

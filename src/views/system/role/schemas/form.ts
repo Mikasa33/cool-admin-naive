@@ -42,7 +42,6 @@ export const schemas = [
       load: menu.list,
       keyField: 'id',
       labelField: 'name',
-      cascade: true,
     },
   },
   {
