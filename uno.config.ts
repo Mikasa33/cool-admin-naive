@@ -20,6 +20,7 @@ export default defineConfig({
     presetIcons({
       scale: 1.2,
       warn: true,
+      cdn: 'https://esm.sh/',
     }),
     presetTypography(),
     presetWebFonts({

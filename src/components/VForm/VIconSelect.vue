@@ -8,6 +8,7 @@ defineProps<{
 
 const emit = defineEmits(['update:value'])
 
+const gridRef = ref()
 const inputRef = ref()
 const { width } = useElementSize(inputRef)
 const popoverWidth = computed(() => `${unref(width)}px`)
@@ -16,8 +17,9 @@ const keyword = ref('')
 const filterIcons = computed(() => icons.filter((item: any) => item.includes(unref(keyword))))
 const pagination: any = reactive({
   page: 1,
-  total: computed(() => Math.ceil(unref(filterIcons).length / 20)),
-  data: computed(() => unref(filterIcons).slice((pagination.page - 1) * 20, pagination.page * 20)),
+  size: 60,
+  total: computed(() => Math.ceil(unref(filterIcons).length / pagination.size)),
+  data: computed(() => unref(filterIcons).slice((pagination.page - 1) * pagination.size, pagination.page * pagination.size)),
 })
 
 watch(
@@ -54,7 +56,17 @@ onUnmounted(() => {
         v-bind="$attrs"
         readonly
         class="v-icon-select-input"
-      />
+      >
+        <template
+          v-if="value"
+          #prefix
+        >
+          <div
+            :class="value"
+            class="mr-4px"
+          />
+        </template>
+      </NInput>
     </template>
 
     <div class="my-8px">
@@ -64,12 +76,13 @@ onUnmounted(() => {
         clearable
         class="mb-8px"
       />
-      <NScrollbar :style="{ height: '202px' }">
+      <NScrollbar :style="{ maxHeight: '202px' }">
         <div v-show="filterIcons.length">
           <NGrid
+            ref="gridRef"
             :x-gap="8"
             :y-gap="8"
-            cols="2 400:4 640:8 1024:12 1280:12 1536:16 1920:24"
+            cols="2 200:4 300:6 400:8 600:12 800:16"
           >
             <NGi
               v-for="(icon, index) in pagination.data"

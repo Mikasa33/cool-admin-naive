@@ -1,5 +1,3 @@
-// @unocss-include
-
 export default [
   'i-icon-park-outline-a-cane',
   'i-icon-park-outline-abdominal',

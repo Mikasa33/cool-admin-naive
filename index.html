@@ -9,5 +9,23 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+
+    <!-- 使用 CDN 加载图标 -->
+    <script type="module">
+      import init from 'https://esm.sh/@unocss/runtime'
+      import presetIcons from 'https://esm.sh/@unocss/preset-icons/browser'
+
+      init({
+        defaults: {
+          presets: [
+            presetIcons({
+              scale: 1.2,
+              warn: true,
+              cdn: 'https://esm.sh/',
+            }),
+          ],
+        },
+      })
+    </script>
   </body>
 </html>
