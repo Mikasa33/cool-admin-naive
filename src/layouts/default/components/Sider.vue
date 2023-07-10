@@ -7,6 +7,8 @@ withDefaults(defineProps<Props>(), {
   headerHeight: 64,
 })
 
+const title = import.meta.env.VITE_APP_TITLE
+
 const route = useRoute()
 const router = useRouter()
 const isDark = useDark()
@@ -40,7 +42,12 @@ function handleClickLogo() {
   router.push('/')
 }
 
-function handleUpdateMenu(key: string) {
+function handleUpdateMenu(key: string, menu: any) {
+  if (menu.isFrame) {
+    window.open(menu.router)
+    return
+  }
+
   router.push(key)
 }
 </script>
@@ -56,19 +63,19 @@ function handleUpdateMenu(key: string) {
     class="layout-sider !z-999"
   >
     <div
-      class="overflow-hidden cursor-pointer flex-center whitespace-nowrap text-20px"
+      class="flex-center cursor-pointer overflow-hidden whitespace-nowrap text-20px"
       :style="{ height: `${headerHeight}px` }"
       @click="handleClickLogo"
     >
       <img
         src="/logo.png"
-        class="h-32px w-32px"
+        class="h-36px w-36px"
       >
       <span
         v-show="!collapsed"
-        class="font-bold ml-8px transition-base"
+        class="ml-8px font-bold transition-base"
       >
-        COOL-ADMIN
+        {{ title }}
       </span>
     </div>
     <NScrollbar
@@ -83,6 +90,7 @@ function handleUpdateMenu(key: string) {
         :icon-size="18"
         :inverted="!isDark"
         :indent="20"
+        accordion
         @update:value="handleUpdateMenu"
       />
     </NScrollbar>
