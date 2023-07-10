@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import icons from '../VIcon/icons'
+import iconParkOutline from '../VIcon/iconParkOutline'
 import { renderIcon } from '@/utils/icon'
 
 defineProps<{
@@ -14,7 +14,7 @@ const { width } = useElementSize(inputRef)
 const popoverWidth = computed(() => `${unref(width)}px`)
 const [show, toggleShow] = useToggle()
 const keyword = ref('')
-const filterIcons = computed(() => icons.filter((item: any) => item.includes(unref(keyword))))
+const filterIcons = computed(() => iconParkOutline.filter((item: any) => item.includes(unref(keyword))))
 const pagination: any = reactive({
   page: 1,
   size: 60,
@@ -131,3 +131,5 @@ onUnmounted(() => {
   }
 }
 </style>
+../VIcon/icon-park-outline
+../VIcon/iconParkOutline

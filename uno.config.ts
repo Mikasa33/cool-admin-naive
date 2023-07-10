@@ -17,6 +17,7 @@ export default defineConfig({
   ],
   presets: [
     presetUno(),
+    // 想全走 CDN 加载图标，就把这个注掉，详细去看 index.html
     presetIcons({
       scale: 1.2,
       warn: true,
