@@ -7,9 +7,19 @@ import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
+import dayjs from 'dayjs'
+import pkg from './package.json'
 
-// https://vitejs.dev/config/
+const { dependencies, devDependencies, name, version } = pkg
+const __APP_INFO__ = {
+  pkg: { dependencies, devDependencies, name, version },
+  lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+}
+
 export default defineConfig({
+  define: {
+    __APP_INFO__: JSON.stringify(__APP_INFO__),
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

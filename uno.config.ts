@@ -14,6 +14,7 @@ export default defineConfig({
     ['flex-x-center', 'flex justify-center'],
     ['flex-y-center', 'flex items-center'],
     ['transition-base', 'transition duration-300'],
+    ['wh-full', 'w-full h-full'],
   ],
   presets: [
     presetUno(),
