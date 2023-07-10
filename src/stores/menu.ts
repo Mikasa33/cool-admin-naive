@@ -77,7 +77,7 @@ export const useMenuStore = defineStore('menu', () => {
         rs.push({
           name: router,
           path: router,
-          redirect: children?.[0].path || children?.[0].redirect,
+          redirect: children?.[0]?.path || children?.[0]?.redirect,
           component: !parentId && layoutComponent,
           meta,
           children,
