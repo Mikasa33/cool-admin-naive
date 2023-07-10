@@ -75,8 +75,14 @@ function setFieldsValue(val: any) {
     if (!schema)
       continue
 
-    if (schema?.hook?.set)
-      schema.hook.set({ model: val })
+    if (schema?.hook?.set) {
+      try {
+        schema.hook.set({ model: val })
+      }
+      catch (err: any) {
+        console.error(`${schema.field} 执行 hook.set 失败`)
+      }
+    }
 
     model.value[schema.field] = val[schema?.field]
   }
