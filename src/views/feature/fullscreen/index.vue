@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { isFullscreen, toggle } = useFullscreen()
+const { isFullscreen, enter, exit, toggle } = useFullscreen()
 
 const elRef = ref()
 const { isFullscreen: isFullscreenEl, toggle: toggleEl } = useFullscreen(elRef)
@@ -31,13 +31,13 @@ const { isFullscreen: isFullscreenEl, toggle: toggleEl } = useFullscreen(elRef)
         >
           <NButton
             type="primary"
-            @click="toggle(true)"
+            @click="enter()"
           >
             打开全屏
           </NButton>
           <NButton
             type="warning"
-            @click="toggle(false)"
+            @click="exit()"
           >
             关闭全屏
           </NButton>
@@ -72,19 +72,5 @@ const { isFullscreen: isFullscreenEl, toggle: toggleEl } = useFullscreen(elRef)
         </NSpace>
       </NAlert>
     </NCard>
-
-    <NWatermark
-      v-if="show"
-      content="核心机密"
-      cross
-      fullscreen
-      :font-size="16"
-      :line-height="16"
-      :width="200"
-      :height="200"
-      :x-offset="12"
-      :y-offset="20"
-      :rotate="-15"
-    />
   </div>
 </template>
