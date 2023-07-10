@@ -1,1 +1,2 @@
-export { setupDirectives } from '@/plugins/directives'
+export { setupDirectives } from './directives'
+export { setupPinia } from './pinia'

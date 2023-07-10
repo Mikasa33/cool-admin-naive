@@ -1,9 +1,8 @@
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-import { setupDirectives } from '@/plugins'
+import { setupDirectives, setupPinia } from '@/plugins'
 
 import '@unocss/reset/tailwind.css'
 import './styles/index.less'
@@ -11,7 +10,7 @@ import 'uno.css'
 
 const app = createApp(App)
 
-app.use(createPinia())
+setupPinia(app)
 app.use(router)
 setupDirectives(app)
 
