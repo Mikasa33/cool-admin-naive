@@ -6,10 +6,8 @@ function findFiles() {
   const files = import.meta.glob(['/src/views/**/*.vue', '!**/components'])
   const list: string[] = []
 
-  for (const i in files) {
-    if (!i.includes('/sys/'))
-      list.push(i.substring(10))
-  }
+  for (const i in files)
+    list.push(i.substring(10))
 
   return deepPaths(list)
 }
@@ -76,6 +74,13 @@ export const schemas = [
     ifShow: ({ model }: any) => model.type !== 2,
   },
   {
+    field: 'isFrame',
+    label: '是否外链',
+    component: 'NSwitch',
+    defaultValue: false,
+    ifShow: ({ model }: any) => model.type === 1,
+  },
+  {
     field: 'viewPath',
     label: '文件路径',
     component: 'NCascader',
@@ -88,11 +93,11 @@ export const schemas = [
         model.viewPath = `/views${model.viewPath}`
       },
       set: ({ model }: any) => {
-        model.viewPath = model.viewPath.replace(/\/views/g, '')
+        model.viewPath = model.viewPath?.replace(/\/views/g, '')
       },
     },
     rules: { required: true, message: '请选择文件路径', trigger: ['blur', 'input'] },
-    ifShow: ({ model }: any) => model.type === 1,
+    ifShow: ({ model }: any) => model.type === 1 && !model.isFrame,
   },
   {
     field: 'icon',

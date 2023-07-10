@@ -18,6 +18,7 @@ async function handleOpen(params: { edit?: boolean; id?: number | string; parent
   toggleInit(true)
   isEdit.value = params?.edit || false
   unref(formRef).init(schemas)
+
   if (params?.edit) {
     try {
       const data = await menu.info({ id: params.id })

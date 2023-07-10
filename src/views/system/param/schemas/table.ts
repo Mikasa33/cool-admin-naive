@@ -3,7 +3,7 @@ import { NTag } from 'naive-ui'
 export const dataType = [
   { value: 0, label: '字符串', type: 'primary' },
   { value: 1, label: '富文本', type: 'info' },
-  { value: 2, label: '文件', type: 'warning' },
+  // { value: 2, label: '文件', type: 'warning' },
 ]
 
 export const columns = [

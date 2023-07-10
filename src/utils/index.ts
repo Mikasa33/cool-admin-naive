@@ -92,3 +92,15 @@ export function deepPaths(paths: string[], splitor?: string) {
 
   return list
 }
+
+export function openWindow(
+  url: string,
+  opt?: { target?: any; noopener?: boolean; noreferrer?: boolean },
+) {
+  const { target = '__blank', noopener = true, noreferrer = true } = opt || {}
+  const feature: string[] = []
+
+  noopener && feature.push('noopener=yes')
+  noreferrer && feature.push('noreferrer=yes')
+  window.open(url, target, feature.join(','))
+}
