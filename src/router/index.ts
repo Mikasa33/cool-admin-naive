@@ -5,8 +5,6 @@ import CustomLayout from '@/layouts/custom/index.vue'
 import storage from '@/utils/storage'
 import { renderIcon } from '@/utils/icon'
 
-const { loadingBar } = useDiscreteApi()
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -86,7 +84,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  loadingBar.start()
+  window.$loadingBar?.start()
 
   const userStore = useUserStore()
   const menuStore = useMenuStore()
@@ -124,7 +122,7 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach(() => {
-  loadingBar.finish()
+  window.$loadingBar?.finish()
 })
 
 export default router
