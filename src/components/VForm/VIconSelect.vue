@@ -53,6 +53,7 @@ onUnmounted(() => {
       <NInput
         ref="inputRef"
         :value="value"
+        placeholder="请选择图标"
         v-bind="$attrs"
         readonly
         class="v-icon-select-input"
@@ -65,6 +66,9 @@ onUnmounted(() => {
             :class="value"
             class="mr-4px"
           />
+        </template>
+        <template #suffix>
+          <div class="i-icon-park-outline-down" />
         </template>
       </NInput>
     </template>
@@ -116,7 +120,7 @@ onUnmounted(() => {
         :page-count="pagination.total"
         :page-size="20"
         simple
-        class="flex justify-end mt-8px"
+        class="mt-8px flex justify-end"
       />
     </div>
   </NPopover>
