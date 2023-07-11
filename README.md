@@ -22,7 +22,7 @@
 
 账户：admin，密码：123456
 
-<img src="https://github.com/Mikasa33/cool-admin-naive/assets/29498153/778d3cb5-0d13-473f-95ea-866daca10b64" alt="Admin Home" ></a>
+![cool mikasa cc_workbench](https://github.com/Mikasa33/cool-admin-naive/assets/29498153/f5873370-c5da-4e91-ae50-238833b372a1)
 
 ## 项目后端
 
