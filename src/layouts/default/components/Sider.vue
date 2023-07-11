@@ -11,7 +11,7 @@ const title = import.meta.env.VITE_APP_TITLE
 
 const route = useRoute()
 const router = useRouter()
-const isDark = useDark()
+const themeStore = useThemeStore()
 const menuStore = useMenuStore()
 const { width } = useWindowSize()
 
@@ -56,7 +56,7 @@ function handleUpdateMenu(key: string, menu: any) {
   <NLayoutSider
     v-model:collapsed="collapsed"
     show-trigger
-    :inverted="!isDark"
+    :inverted="!themeStore.isDark"
     collapse-mode="width"
     :collapsed-width="64"
     :width="220"
@@ -88,7 +88,7 @@ function handleUpdateMenu(key: string, menu: any) {
         :collapsed-width="64"
         :collapsed-icon-size="18"
         :icon-size="18"
-        :inverted="!isDark"
+        :inverted="!themeStore.isDark"
         :indent="20"
         accordion
         @update:value="handleUpdateMenu"

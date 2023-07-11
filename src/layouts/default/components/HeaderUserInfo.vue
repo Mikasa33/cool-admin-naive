@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import HeaderItem from './HeaderItem.vue'
-
 const router = useRouter()
 const dialog = useDialog()
 const userStore = useUserStore()
@@ -44,19 +42,24 @@ function handleSelect(val: any) {
 </script>
 
 <template>
-  <NDropdown
-    :options="options"
-    trigger="hover"
-    @select="handleSelect"
-  >
-    <HeaderItem>
-      <NAvatar
-        :src="userInfo?.headImg"
-        round
-        object-fit="cover"
-        :size="36"
-      />
-      <span class="ml-8px">{{ userInfo?.nickName }}</span>
-    </HeaderItem>
-  </NDropdown>
+  <div class="text-0">
+    <NDropdown
+      :options="options"
+      trigger="hover"
+      @select="handleSelect"
+    >
+      <NButton
+        tertiary
+        circle
+        size="large"
+      >
+        <NAvatar
+          :src="userInfo?.headImg"
+          round
+          object-fit="cover"
+          :size="40"
+        />
+      </NButton>
+    </NDropdown>
+  </div>
 </template>

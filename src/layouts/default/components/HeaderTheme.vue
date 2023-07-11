@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import HeaderItem from './HeaderItem.vue'
-
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
+const themeStore = useThemeStore()
 </script>
 
 <template>
-  <HeaderItem @click="toggleDark()">
-    <VThemeIcon @click.stop />
-  </HeaderItem>
+  <NButton
+    tertiary
+    circle
+    size="large"
+    @click="themeStore.toggleShow()"
+  >
+    <template #icon>
+      <div class="i-icon-park-outline-setting-one" />
+    </template>
+  </NButton>
 </template>

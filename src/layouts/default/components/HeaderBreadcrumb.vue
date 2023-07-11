@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
+const themeStore = useThemeStore()
 
 const breadcrumbs = computed(() => {
   if (['/403', '/404', '/500', '/502'].includes(route.path))
@@ -10,20 +11,19 @@ const breadcrumbs = computed(() => {
 </script>
 
 <template>
-  <NBreadcrumb>
-    <NBreadcrumbItem
-      v-for="(breadcrumb, index) in breadcrumbs"
-      :key="index"
-      :clickable="false"
-      class="breadcrumb-item"
-    >
-      <div class="flex-center">
-        <Component
-          :is="breadcrumb.meta?.icon"
-          class="mr-4px"
-        />
+  <div
+    v-show="themeStore.breadcrumbVisible"
+    class="h-40px flex-center rounded-40px bg-[rgba(46,51,56,.05)] px-16px"
+  >
+    <NBreadcrumb>
+      <NBreadcrumbItem
+        v-for="(breadcrumb, index) in breadcrumbs"
+        :key="index"
+        :clickable="false"
+        class="breadcrumb-item"
+      >
         {{ breadcrumb.meta?.title }}
-      </div>
-    </NBreadcrumbItem>
-  </NBreadcrumb>
+      </NBreadcrumbItem>
+    </NBreadcrumb>
+  </div>
 </template>

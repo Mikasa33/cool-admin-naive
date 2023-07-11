@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import HeaderBreadcrumb from './HeaderBreadcrumb.vue'
+import HeaderDark from './HeaderDark.vue'
 import HeaderFullscreen from './HeaderFullscreen.vue'
+import HeaderGithub from './HeaderGithub.vue'
+import HeaderRefresh from './HeaderRefresh.vue'
 import HeaderTheme from './HeaderTheme.vue'
 import HeaderUserInfo from './HeaderUserInfo.vue'
 
@@ -19,15 +22,18 @@ withDefaults(defineProps<Props>(), {
     class="layout-header z-998 flex-y-center"
     :style="{ height: `${height}px` }"
   >
-    <div class="flex items-center justify-between w-full h-full">
-      <div class="flex items-center px-12px">
+    <div class="h-full w-full flex items-center justify-between px-16px">
+      <NSpace align="center">
+        <HeaderRefresh />
         <HeaderBreadcrumb />
-      </div>
-      <div class="flex h-full">
+      </NSpace>
+      <NSpace align="center">
+        <HeaderGithub />
         <HeaderFullscreen />
+        <HeaderDark />
         <HeaderTheme />
         <HeaderUserInfo />
-      </div>
+      </NSpace>
     </div>
   </NLayoutHeader>
 </template>
