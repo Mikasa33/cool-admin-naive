@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getCaptcha } from '@/apis/open'
 
-const isDark = useDark()
+const themeStore = useThemeStore()
 const userStore = useUserStore()
 const [isLoading, toggle] = useToggle()
 
@@ -17,7 +17,7 @@ const captcha = ref({
   captchaId: null,
   data: '',
 })
-const captchaSvg = computed(() => unref(captcha).data?.replace(/#fff/g, unref(isDark) ? '#63e2b7' : '#18a058'))
+const captchaSvg = computed(() => unref(captcha).data?.replace(/#fff/g, unref(themeStore.isDark) ? '#63e2b7' : '#18a058'))
 
 const form = ref({
   username: 'admin',
@@ -51,7 +51,7 @@ onMounted(() => {
 
 <template>
   <div class="h-100vh flex-center">
-    <VThemeIcon class="absolute cursor-pointer right-32px top-32px" />
+    <VThemeIcon class="absolute right-32px top-32px cursor-pointer" />
 
     <NGrid
       item-responsive
@@ -72,7 +72,7 @@ onMounted(() => {
         <div class="my-48px w-50%">
           <div class="flex-center">
             <img
-              :src="isDark ? '/logo.png' : '/favicon.ico'"
+              :src="themeStore.isDark ? '/logo.png' : '/favicon.ico'"
               class="h-42px"
             >
             <span class="ml-12px text-32px">COOL-ADMIN</span>
