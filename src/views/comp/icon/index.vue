@@ -35,7 +35,7 @@ const icon = ref('')
         type="success"
         class="mt-16px"
       >
-        <VIconSelect v-model:value="icon" />
+        <VIconSelect v-model:value="icon" class="!mt-8px" />
       </NAlert>
     </NCard>
   </div>
