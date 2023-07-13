@@ -122,7 +122,7 @@ function handleBeforeUpload({ file, fileList }: { file: UploadFileInfo; fileList
     }
   }
 
-  if (!attrs.multiple)
+  if (attrs.max === 1)
     list.value = []
 
   return true
@@ -147,6 +147,7 @@ function handleRemove({ file, fileList }: { file: UploadFileInfo; fileList: Uplo
     :custom-request="customRequest"
     :list-type="listType"
     :file-list-style="listType === 'image-card' ? undefined : { padding: '8px', border: '1px solid rgb(239, 239, 245)', borderRadius: '3px' }"
+    class="v-upload"
     @before-upload="handleBeforeUpload"
     @remove="handleRemove"
   >
@@ -169,3 +170,18 @@ function handleRemove({ file, fileList }: { file: UploadFileInfo; fileList: Uplo
     </NButton>
   </NUpload>
 </template>
+
+<style lang="less" scoped>
+.v-upload {
+  :deep(.n-upload-file-info) {
+    .n-image {
+      width: 100%;
+      height: 100%;
+
+      img {
+        object-fit: cover !important;
+      }
+    }
+  }
+}
+</style>
