@@ -100,7 +100,7 @@ function handleRefresh() {
           <template #action>
             <VTableBtn
               v-permission="['base:sys:user:add']"
-              click="handleAdd"
+              @click="handleAdd"
             >
               新 建
             </VTableBtn>
