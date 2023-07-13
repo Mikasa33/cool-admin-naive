@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { ButtonProps, ModalProps } from 'naive-ui'
+import { uniqueId } from 'lodash-es'
+import startDrag from '@/utils/drag'
 
 interface Props {
   modalProps?: ModalProps
@@ -16,6 +18,8 @@ interface Props {
   cancelType?: string
   cancelLoading?: boolean
   isCrud?: boolean
+  drag?: boolean
+  fullscreen?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -37,15 +41,34 @@ const props = withDefaults(defineProps<Props>(), {
   confirmLabel: '确认',
   confirmType: 'primary',
   cancelLabel: '取消',
+  drag: true,
+  fullscreen: true,
 })
 
 const emit = defineEmits(['clickAction', 'confirm', 'cancel'])
 
 const modalRef = ref()
-const modalContainerRef = computed(() => modalRef.value?.containerRef)
+const modalContainerRef = computed(() => unref(modalRef)?.containerRef)
+
+const vModalId = uniqueId('v-modal-')
+const vModalBarId = uniqueId('v-modal-bar-')
 
 const [show, toggleShow] = useToggle()
 const [isFullscreen, toggleFullscreen] = useToggle()
+
+watch(
+  isFullscreen,
+  (val: boolean) => {
+    if (!val || !props.drag)
+      return
+
+    const oBox: any = document.getElementById(vModalId)
+    if (oBox.style) {
+      oBox.style.top = 0
+      oBox.style.left = 0
+    }
+  },
+)
 
 const modalClass = computed(() => unref(isFullscreen) ? null : '!mt-10vh')
 const modalStyle = computed(() => {
@@ -96,6 +119,19 @@ function handleUpdateShow(val: boolean) {
   emit('cancel')
 }
 
+function handleAfterEnter() {
+  if (!props.drag)
+    return
+
+  const oBox = document.getElementById(vModalId)
+  const oBar = document.getElementById(vModalBarId)
+  if (!oBox || !oBar) {
+    console.warn('not found modal')
+    return
+  }
+  startDrag(oBar, { target: oBox })
+}
+
 function handleClickAction(action: any) {
   if (action.handle === 'cancel')
     handleUpdateShow(false)
@@ -111,6 +147,7 @@ defineExpose({
 
 <template>
   <NModal
+    :id="vModalId"
     ref="modalRef"
     :show="show"
     preset="card"
@@ -126,14 +163,20 @@ defineExpose({
     :class="modalClass"
     :style="modalStyle"
     @update:show="handleUpdateShow"
+    @after-enter="handleAfterEnter"
   >
     <template #header>
-      <div class="w-full">
+      <div
+        :id="vModalBarId"
+        :class="{ 'cursor-move': drag }"
+        class="w-full"
+      >
         {{ title }}
       </div>
     </template>
     <template #header-extra>
       <div
+        v-if="fullscreen"
         class="n-base-close n-base-close--absolute n-card-header__close !mr-8px"
         @click="toggleFullscreen()"
       >
