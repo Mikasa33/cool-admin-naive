@@ -78,7 +78,7 @@ function handleRefresh() {
           v-permission="['base:sys:menu:add']"
           @click="handleAdd"
         >
-          新建
+          新 建
         </VTableBtn>
         <VTableDialogBtn
           v-permission="['base:sys:menu:delete']"
