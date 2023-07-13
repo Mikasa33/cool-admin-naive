@@ -35,9 +35,9 @@ function getThemeColors(colors: [ColorType, string][]) {
 }
 
 function getNaiveThemeOverrides(colors: Record<ColorType, string>): GlobalThemeOverrides {
-  const { primary, success, warning, error } = colors
+  const { primary, info, success, warning, error } = colors
 
-  const info = getColorPalette(primary, 7)
+  // const info = getColorPalette(primary, 7)
 
   const themeColors = getThemeColors([
     ['primary', primary],
