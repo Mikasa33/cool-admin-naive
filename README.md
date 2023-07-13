@@ -34,20 +34,6 @@
 
 ***务必修改 menu.ts 文件，添加了一个 `isFrame` 属性***
 
-## 演示
-
-[http://cool.mikasa.cc](http://cool.mikasa.cc)
-
-账户：admin，密码：123456
-
-## 项目后端
-
-[https://github.com/cool-team-official/cool-admin-midway](https://github.com/cool-team-official/cool-admin-midway)
-
-***务必使用 sql 目录下的 sql 文件更新数据库***
-
-***务必修改 menu.ts 文件，添加了一个 `isFrame` 属性***
-
 ## 项目示例图
 
 ![](https://github.com/Mikasa33/cool-admin-naive/assets/29498153/4035badd-ebbd-43a3-ab03-33450400da60)
