@@ -9,7 +9,7 @@ const startDrag = function (eleBar: any, options: any) {
     return
 
   // 默认数据
-  const defaults = {
+  const defaults: any = {
     target: eleBar,
     bounding: window,
     edgeLock: true,
@@ -53,7 +53,7 @@ const startDrag = function (eleBar: any, options: any) {
   const store: any = {}
   eleBar.addEventListener(objEventType.start, (event: any) => {
     // IE 拖拽可能拖不动的处理
-    if (!window.WeakMap || typeof document.msHidden != 'undefined')
+    if (!window.WeakMap || typeof (document as any).msHidden != 'undefined')
       event.preventDefault()
 
     // 兼顾移动端
@@ -63,8 +63,8 @@ const startDrag = function (eleBar: any, options: any) {
     store.y = event.pageY
     store.x = event.pageX
     store.isMoving = true
-    store.top = parseFloat(getComputedStyle(eleTarget).top) || 0
-    store.left = parseFloat(getComputedStyle(eleTarget).left) || 0
+    store.top = Number.parseFloat(getComputedStyle(eleTarget).top) || 0
+    store.left = Number.parseFloat(getComputedStyle(eleTarget).left) || 0
 
     if (params.edgeLock === true && bounding) {
       if (bounding === window) {
