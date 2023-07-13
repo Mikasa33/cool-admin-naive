@@ -135,5 +135,3 @@ onUnmounted(() => {
   }
 }
 </style>
-../VIcon/icon-park-outline
-../VIcon/iconParkOutline
