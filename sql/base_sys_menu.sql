@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : cool_test
+ Source Server         : cool_dev
  Source Server Type    : MySQL
  Source Server Version : 50740
  Source Host           : 82.157.235.226:3306
- Source Schema         : cool_test
+ Source Schema         : cool_dev
 
  Target Server Type    : MySQL
  Target Server Version : 50740
  File Encoding         : 65001
 
- Date: 10/07/2023 17:28:42
+ Date: 13/07/2023 11:48:40
 */
 
 SET NAMES utf8mb4;
@@ -39,7 +39,7 @@ CREATE TABLE `base_sys_menu` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `IDX_05e3d6a56604771a6da47ebf8e` (`createTime`),
   KEY `IDX_d5203f18daaf7c3fe0ab34497f` (`updateTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of base_sys_menu
@@ -98,16 +98,16 @@ INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (51, '2023-04-16 21:59:58.525729', '2023-07-07 15:15:54.703167', 12, '分页查询', NULL, 'user:info:page', 2, NULL, 4, NULL, 0, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (52, '2023-04-16 21:59:58.525729', '2023-07-07 15:15:47.859987', 12, '新增', NULL, 'user:info:add', 2, NULL, 1, NULL, 0, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (53, '2020-07-25 16:22:14.000000', '2021-03-03 10:36:00.000000', 11, '图片上传', NULL, 'space:info:page,space:info:list,space:info:info,space:info:add,space:info:delete,space:info:update,space:type:page,space:type:list,space:type:info,space:type:add,space:type:delete,space:type:update', 2, NULL, 1, NULL, 0, 1, 0);
-INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (54, '2023-07-10 14:20:27.210000', '2023-07-10 15:43:39.360000', NULL, '异常页面', '/exception', NULL, 0, 'i-icon-park-outline-caution', 5, NULL, 1, 1, 0);
+INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (54, '2023-07-10 14:20:27.210000', '2023-07-11 18:15:41.750000', NULL, '异常页面', '/exception', NULL, 0, 'i-icon-park-outline-caution', 6, NULL, 1, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (55, '2023-07-10 14:26:49.347000', '2023-07-10 14:26:49.348000', 54, '403', '/exception/403', NULL, 1, 'i-icon-park-outline-wrong-user', 1, '/views/exception/403.vue', 1, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (56, '2023-07-10 14:27:44.111000', '2023-07-10 14:27:44.111000', 54, '404', '/exception/404', NULL, 1, 'i-icon-park-outline-close-one', 2, '/views/exception/404.vue', 1, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (57, '2023-07-10 14:28:32.210000', '2023-07-10 14:28:32.210000', 54, '500', '/exception/500', NULL, 1, 'i-icon-park-outline-link-cloud-faild', 3, '/views/exception/500.vue', 1, 1, 0);
-INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (58, '2023-07-10 14:34:22.520000', '2023-07-10 15:43:30.465000', NULL, '结果页面', '/result', NULL, 0, 'i-icon-park-outline-doc-success', 6, NULL, 1, 1, 0);
+INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (58, '2023-07-10 14:34:22.520000', '2023-07-11 18:15:39.676000', NULL, '结果页面', '/result', NULL, 0, 'i-icon-park-outline-doc-success', 7, NULL, 1, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (59, '2023-07-10 14:35:07.296000', '2023-07-10 14:35:07.296000', 58, '成功页', '/result/success', NULL, 1, 'i-icon-park-outline-check-one', 1, '/views/result/success.vue', 1, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (60, '2023-07-10 14:35:42.662000', '2023-07-10 14:35:42.662000', 58, '失败页', '/result/fail', NULL, 1, 'i-icon-park-outline-close-one', 2, '/views/result/fail.vue', 1, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (61, '2023-07-10 14:36:01.148000', '2023-07-10 14:36:01.148000', 58, '信息页', '/result/info', NULL, 1, 'i-icon-park-outline-info', 3, '/views/result/info.vue', 1, 1, 0);
-INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (62, '2023-07-10 14:54:37.414000', '2023-07-10 15:43:25.074000', NULL, '关于项目', '/about', NULL, 1, 'i-icon-park-outline-lightning', 8, '/views/about/index.vue', 1, 1, 0);
-INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (63, '2023-07-10 15:09:20.038000', '2023-07-10 15:43:27.890000', NULL, '外部页面', '/frame', NULL, 0, 'i-icon-park-outline-web-page', 7, NULL, 1, 1, 0);
+INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (62, '2023-07-10 14:54:37.414000', '2023-07-11 18:15:33.777000', NULL, '关于项目', '/about', NULL, 1, 'i-icon-park-outline-lightning', 9, '/views/about/index.vue', 1, 1, 0);
+INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (63, '2023-07-10 15:09:20.038000', '2023-07-11 18:15:37.648000', NULL, '外部页面', '/frame', NULL, 0, 'i-icon-park-outline-web-page', 8, NULL, 1, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (64, '2023-07-10 15:18:52.096000', '2023-07-10 15:40:06.768000', 63, 'Naive UI (内嵌)', '/frame/naiveui', NULL, 1, 'i-icon-park-outline-smiling-face', 1, '/views/frame/naiveui.vue', 1, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (65, '2023-07-10 15:23:49.687000', '2023-07-10 15:27:33.749000', 63, 'Naive UI (外链)', 'https://www.naiveui.com/zh-CN/light/', NULL, 1, 'i-icon-park-outline-upside-down-face', 2, NULL, 1, 1, 1);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (66, '2023-07-10 15:44:55.203000', '2023-07-10 15:44:55.203000', NULL, '功能示例', '/feature', NULL, 0, 'i-icon-park-outline-waterfalls-v', 4, NULL, 1, 1, 0);
@@ -117,6 +117,12 @@ INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (70, '2023-07-10 16:45:54.150000', '2023-07-10 16:46:01.639000', 66, '打印', '/feature/print', NULL, 1, 'i-icon-park-outline-printer', 4, '/views/feature/print/index.vue', 1, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (71, '2023-07-10 16:49:33.705000', '2023-07-10 16:49:33.705000', 66, '水印', '/feature/watermark', NULL, 1, 'i-icon-park-outline-water-level', 5, '/views/feature/watermark/index.vue', 1, 1, 0);
 INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (72, '2023-07-10 16:54:32.566000', '2023-07-10 16:54:32.566000', 66, '全屏', '/feature/fullscreen', NULL, 1, 'i-icon-park-outline-full-screen-two', 6, '/views/feature/fullscreen/index.vue', 1, 1, 0);
+INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (73, '2023-07-11 18:16:24.267000', '2023-07-11 18:16:24.267000', NULL, '组件示例', '/comp', NULL, 0, 'i-icon-park-outline-components', 5, NULL, 1, 1, 0);
+INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (74, '2023-07-11 18:18:01.315000', '2023-07-11 18:18:01.315000', 73, '图标', '/comp/icon', NULL, 1, 'i-icon-park-outline-application-two', 1, '/views/comp/icon/index.vue', 1, 1, 0);
+INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (75, '2023-07-13 10:39:15.532000', '2023-07-13 10:39:15.532000', 73, '拖拽', '/comp/drag', NULL, 1, 'i-icon-park-outline-drag', 2, '/views/comp/drag/index.vue', 1, 1, 0);
+INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (76, '2023-07-13 10:46:20.742000', '2023-07-13 10:46:20.742000', 73, '富文本', '/comp/richtext', NULL, 1, 'i-icon-park-outline-add-text', 3, '/views/comp/richtext/index.vue', 1, 1, 0);
+INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (77, '2023-07-13 10:51:59.379000', '2023-07-13 10:53:34.711000', 73, '二维码', '/comp/qrcode', NULL, 1, 'i-icon-park-outline-two-dimensional-code', 4, '/views/comp/qrcode/index.vue', 1, 1, 0);
+INSERT INTO `base_sys_menu` (`id`, `createTime`, `updateTime`, `parentId`, `name`, `router`, `perms`, `type`, `icon`, `orderNum`, `viewPath`, `keepAlive`, `isShow`, `isFrame`) VALUES (78, '2023-07-13 11:08:27.152000', '2023-07-13 11:08:59.226000', 73, '弹窗', '/comp/modal', NULL, 1, 'i-icon-park-outline-browser', 5, '/views/comp/modal/index.vue', 1, 1, 0);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
