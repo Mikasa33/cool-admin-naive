@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { DataTableColumn, FormItemGiProps, PaginationProps } from 'naive-ui'
 import { NSpace } from 'naive-ui'
+import { vTableCheckedRowKey } from '../inject'
 import { useCheckedRow } from './hooks/useCheckedRow'
 import { useColumn } from './hooks/useColumn'
 import { useHeight } from './hooks/useHeight'
@@ -77,7 +78,7 @@ onMounted(() => {
   props.init && load()
 })
 
-provide('v-table-checkedRowKeys', checkedRowKeys)
+provide(vTableCheckedRowKey, checkedRowKeys)
 
 defineExpose({
   getCheckedRowKeys,
@@ -108,7 +109,7 @@ defineExpose({
           align="center"
           justify="space-between"
         >
-          <div class="flex items-center actions">
+          <div class="actions flex items-center">
             <slot name="action" />
           </div>
           <VTableTools
