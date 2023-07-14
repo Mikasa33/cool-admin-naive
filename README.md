@@ -5,7 +5,7 @@
 
 ## 简介
 
-[cool-admin-naive](https://github.com/Mikasa33/cool-admin-naive) 是一个基于 Vue3、Vite3、TypeScript、NaiveUI、Pinia 和 UnoCSS 的清新优雅的中后台模版，它使用了最新流行的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于文件的路由系统以及基于 Mock 的动态权限路由，开箱即用的中后台前端解决方案，也可用于学习参考。
+[cool-admin-naive](https://github.com/Mikasa33/cool-admin-naive) 是一个基于 Vue3、Vite3、TypeScript、NaiveUI、Pinia 和 UnoCSS 的清新优雅的中后台模版，它使用了最新流行的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于后台的路由系统以及动态权限路由，开箱即用的中后台前端解决方案，也可用于学习参考。
 
 ## 特性
 
@@ -41,7 +41,6 @@
 ![](https://github.com/Mikasa33/cool-admin-naive/assets/29498153/431b2876-c23d-443b-a93e-c8780ca85206)
 ![](https://github.com/Mikasa33/cool-admin-naive/assets/29498153/1704fa9b-ea1c-4b72-acfb-1d591dffe376)
 ![](https://github.com/Mikasa33/cool-admin-naive/assets/29498153/9ff59974-1665-4ac4-873a-da7f9d2e004d)
-![](https://github.com/Mikasa33/cool-admin-naive/assets/29498153/e0a79dbc-7b13-45a1-ae0c-8e040464c661)
 ![](https://github.com/Mikasa33/cool-admin-naive/assets/29498153/85143af1-18dd-412e-9770-d1de5dba1433)
 
 ## 安装使用
