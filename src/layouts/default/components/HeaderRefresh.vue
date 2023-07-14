@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const reloadApp = inject('app-reload') as Function
+import { appReloadKey } from './inject'
+
+const reloadApp = inject(appReloadKey) as Function
 
 function handleRefresh() {
   reloadApp()

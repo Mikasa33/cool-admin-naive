@@ -2,6 +2,7 @@
 import Header from './components/Header.vue'
 import Sider from './components/Sider.vue'
 import ProjectSetting from './components/ProjectSetting.vue'
+import { appReloadKey } from './components/inject'
 
 const themeStore = useThemeStore()
 const headerHeight = 64
@@ -13,7 +14,7 @@ async function reloadApp() {
   toggle(false)
 }
 
-provide('app-reload', reloadApp)
+provide(appReloadKey, reloadApp)
 </script>
 
 <template>
@@ -49,3 +50,4 @@ provide('app-reload', reloadApp)
 
   <ProjectSetting />
 </template>
+@/layouts/default/inject
