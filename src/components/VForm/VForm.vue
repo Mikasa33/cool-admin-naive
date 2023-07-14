@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { clone, isFunction, isUndefined } from 'lodash-es'
-import { type FormProps, type GridProps, useMessage } from 'naive-ui'
-import { componentMap } from './componentMap'
+import type { FormProps, GridProps } from 'naive-ui'
+import { vFormGetPropKey, vFormModel } from '../inject'
 
-export interface Props {
+interface Props {
   loading?: boolean
   giProps?: GridProps
   giSpan?: number | string
@@ -13,8 +13,6 @@ export interface Props {
 withDefaults(defineProps<Props>(), {
   giSpan: 'xs:24 s:12',
 })
-
-const message = useMessage()
 
 const formRef = ref()
 const model = ref<any>({})
@@ -41,7 +39,6 @@ async function validate() {
     await formRef.value.validate()
   }
   catch (error: any) {
-    message.error('表单验证失败')
     throw new Error(error)
   }
 }
@@ -98,44 +95,8 @@ function getProp(schema: any, prop: any, defaultValue?: any) {
   return prop
 }
 
-function getComponent(schema: any) {
-  let { component, field } = schema
-
-  if (isFunction(component))
-    component = component({ model: unref(model), field })
-
-  return componentMap.get(component)
-}
-
-function getComponentProps(schema: any) {
-  let { label, component, componentProps } = schema
-
-  if (isFunction(componentProps))
-    componentProps = componentProps({ model: unref(model), field: schema.field })
-
-  if (!componentProps)
-    componentProps = {}
-
-  const { placeholder } = componentProps
-  if (!placeholder) {
-    componentProps.placeholder = `请输入${label ?? ''}`
-
-    if (['NCascader', 'NDatePicker', 'VIconSelect', 'VSelect', 'VTreeSelect'].includes(component))
-      componentProps.placeholder = `请选择${label ?? ''}`
-  }
-
-  return componentProps
-}
-
-function getSlots(schema: any, slots: any) {
-  if (isFunction(slots))
-    slots = slots({ model: unref(model), field: schema.field })
-
-  if (!slots)
-    slots = {}
-
-  return slots
-}
+provide(vFormModel, model)
+provide(vFormGetPropKey, getProp)
 
 defineExpose({
   init,
@@ -156,66 +117,20 @@ defineExpose({
       require-mark-placement="left"
       v-bind="formProps"
     >
-      <NGrid
+      <VGrid
+        :children="schemas"
+        :gi-span="giSpan"
         :x-gap="16"
         item-responsive
         responsive="screen"
-        v-bind="giProps"
       >
-        <template v-for="(schema, schemaIndex) in schemas">
-          <NFormItemGi
-            v-if="getProp(schema, schema.show, true) && getProp(schema, schema.ifShow, true)"
-            v-bind="{
-              ...getProp(schema, schema.giProps),
-              ...getProp(schema, schema.itemProps),
-            }"
-            :key="schemaIndex"
-            :path="schema.field"
-            :rule="getProp(schema, schema.rules)"
-            :span="schema.giProps?.span || giSpan"
-          >
-            <template
-              v-if="getProp(schema, schema.showLabel, true)"
-              #label
-            >
-              <NSpace
-                size="small"
-                :justify="formProps?.labelAlign === 'left' ? 'start' : 'end'"
-              >
-                <Component
-                  :is="getSlots(schema, schema.labelPrefix)"
-                  v-if="schema.labelPrefix"
-                />
-                {{ schema.label }}
-              </NSpace>
-            </template>
-            <slot
-              v-if="schema.slot"
-              :name="schema.slot"
-              :model="model"
-              :field="schema.field"
-            />
-            <Component
-              :is="getComponent(schema)"
-              v-else
-              v-bind="getComponentProps(schema)"
-              v-model:value="model[schema.field]"
-              clearable
-            >
-              <template
-                v-for="(slot, key, slotIndex) in getSlots(schema, schema.componentSlots)"
-                :key="slotIndex"
-                #[key]="props"
-              >
-                <Component
-                  :is="slot"
-                  v-bind="props"
-                />
-              </template>
-            </Component>
-          </NFormItemGi>
+        <template #default="{ schema }">
+          <VFormItem
+            :schema="schema"
+            :form-props="formProps"
+          />
         </template>
-      </NGrid>
+      </VGrid>
     </NForm>
   </NSpin>
 </template>

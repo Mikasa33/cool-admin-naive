@@ -45,5 +45,16 @@ onMounted(() => {
       <NSpin v-if="loading" size="small" />
       <NEmpty v-else />
     </template>
+
+    <template
+      v-for="(slot, key, index) in $slots"
+      :key="index"
+      #[key]="props"
+    >
+      <Component
+        :is="slot"
+        v-bind="props"
+      />
+    </template>
   </NSelect>
 </template>
