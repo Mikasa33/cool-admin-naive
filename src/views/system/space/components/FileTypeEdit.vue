@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { spaceType } from '@/apis/space/space'
+import { spaceType } from '@/apis/system/space'
 
 const emit = defineEmits(['refresh'])
 

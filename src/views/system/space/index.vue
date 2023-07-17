@@ -3,7 +3,7 @@ import { NSpace, useMessage } from 'naive-ui'
 import { columns } from './schemas/table'
 import FileType from './components/FileType.vue'
 import { VTableColumnDialogBtn } from '@/components/VTable'
-import { spaceInfo } from '@/apis/space/space'
+import { spaceInfo } from '@/apis/system/space'
 
 const message = useMessage()
 const { hasPermission } = usePermission()
