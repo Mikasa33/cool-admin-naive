@@ -248,8 +248,13 @@ const option4 = ref({
       size="small"
       class="mt-16px"
     >
-      <NGrid :x-gap="16" :y-gap="16">
-        <NGi :span="12">
+      <NGrid
+        item-responsive
+        responsive="screen"
+        :x-gap="16"
+        :y-gap="16"
+      >
+        <NGi span="xs:24 m:12">
           <NAlert
             :show-icon="false"
             title="折线图"
@@ -263,7 +268,7 @@ const option4 = ref({
             />
           </NAlert>
         </NGi>
-        <NGi :span="12">
+        <NGi span="xs:24 m:12">
           <NAlert
             :show-icon="false"
             title="统计图"
@@ -277,7 +282,7 @@ const option4 = ref({
             />
           </NAlert>
         </NGi>
-        <NGi :span="12">
+        <NGi span="xs:24 m:12">
           <NAlert
             :show-icon="false"
             title="饼状图"
@@ -291,7 +296,7 @@ const option4 = ref({
             />
           </NAlert>
         </NGi>
-        <NGi :span="12">
+        <NGi span="xs:24 m:12">
           <NAlert
             :show-icon="false"
             title="仪表盘"
