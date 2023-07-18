@@ -82,7 +82,7 @@ function handleResetShowColumn() {
             class="rounded-2px px-8px py-2px transition-base hover:bg-[rgba(24,160,88,0.15)]"
           >
             <NSpace align="center">
-              <div v-if="isBoolean(element.setting) ? element.setting : true" class="cursor-move handle i-icon-park-outline-direction-adjustment-three text-12px" />
+              <div v-if="isBoolean(element.setting) ? element.setting : true" class="handle i-icon-park-outline-drag cursor-move text-12px" />
               <div v-else class="pr-14px" />
               <NCheckbox
                 :value="element.key"
