@@ -17,7 +17,7 @@ const captcha = ref({
   captchaId: null,
   data: '',
 })
-const captchaSvg = computed(() => unref(captcha).data?.replace(/#fff/g, unref(themeStore.isDark) ? '#63e2b7' : '#18a058'))
+const captchaSvg = computed(() => unref(captcha).data?.replace(/#fff/g, themeStore.themeColor))
 
 const form = ref({
   username: 'admin',
@@ -60,7 +60,8 @@ onMounted(() => {
     >
       <NGi
         span="xs:24 m:12"
-        class="flex-center bg-#18a058 dark:bg-#63e2b7"
+        class="flex-center"
+        :style="{ backgroundColor: themeStore.themeColor }"
       >
         <img src="/login.svg">
       </NGi>
@@ -121,6 +122,7 @@ onMounted(() => {
                 size="large"
                 :maxlength="4"
                 class="captcha"
+                @keyup.enter="handleLogin"
               >
                 <template #prefix>
                   <div class="i-icon-park-outline-protect mr-4px" />
