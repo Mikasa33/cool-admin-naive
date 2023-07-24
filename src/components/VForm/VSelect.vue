@@ -47,7 +47,7 @@ onMounted(() => {
     </template>
 
     <template
-      v-for="(slot, key, index) in $slots"
+      v-for="(slot, key, index) in ($slots as any)"
       :key="index"
       #[key]="props"
     >
