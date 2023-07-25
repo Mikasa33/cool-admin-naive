@@ -16,12 +16,16 @@ export interface Props {
   useSearch?: boolean
   searchGiProps?: FormItemGiProps
   searchSchemas?: Array<any>
-  useTools?: boolean
+  useCard?: boolean
+  useAction?: boolean
+  useTool?: boolean
   striped?: boolean
   size?: 'medium' | 'small' | 'large'
   pagination?: PaginationProps | boolean
   load: Function
   init?: boolean
+  autoHeight?: boolean
+  height?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,18 +33,21 @@ const props = withDefaults(defineProps<Props>(), {
   actionColumn: undefined,
   useSearch: true,
   searchSchemas: () => [],
-  useTools: true,
+  useCard: true,
+  useAction: true,
+  useTool: true,
   striped: false,
   size: 'medium',
   pagination: undefined,
   init: true,
+  autoHeight: true,
 })
 
 const searchRef = ref()
 const searchParams = computed(() => searchRef.value?.getFieldsValue() || {})
 
 const tableRef = ref()
-const { height } = useHeight(tableRef)
+const { height: tableHeight } = useHeight(tableRef)
 const { defaultColumns, filterColumns, handleResetColumns } = useColumn(props)
 const { defaultPagination, mergePagination, paginationParams } = usePagination(props, load)
 const { sort, handleUpdateSorter } = useSort(defaultColumns, reload)
@@ -51,6 +58,10 @@ const data = ref<any[]>([])
 
 function getRowKey(row: any) {
   return row[props.rowKey]
+}
+
+function getData() {
+  return unref(data)
 }
 
 async function load(params?: any) {
@@ -81,6 +92,7 @@ onMounted(() => {
 provide(vTableCheckedRowKey, checkedRowKeys)
 
 defineExpose({
+  getData,
   getCheckedRowKeys,
   setCheckedRowKeys,
   load,
@@ -101,10 +113,14 @@ defineExpose({
       @search="load"
     />
     <NCard
+      v-if="useCard"
       size="small"
       :bordered="false"
     >
-      <template #header>
+      <template
+        v-if="useAction"
+        #header
+      >
         <NSpace
           align="center"
           justify="space-between"
@@ -113,7 +129,7 @@ defineExpose({
             <slot name="action" />
           </div>
           <VTableTools
-            v-if="useTools"
+            v-if="useTool"
             v-model:columns="defaultColumns"
             @striped="handleStriped"
             @refresh="load"
@@ -136,12 +152,51 @@ defineExpose({
         remote
         flex-height
         :style="{
-          height: `${height}px`,
+          height: autoHeight ? `${tableHeight}px` : null,
           minHeight: '300px',
         }"
         @update:sorter="handleUpdateSorter"
       />
     </NCard>
+    <div v-else>
+      <NSpace
+        v-if="useAction"
+        align="center"
+        justify="space-between"
+        class="mb-12px"
+      >
+        <div class="actions flex items-center">
+          <slot name="action" />
+        </div>
+        <VTableTools
+          v-if="useTool"
+          v-model:columns="defaultColumns"
+          @striped="handleStriped"
+          @refresh="load"
+          @density="handleDensity"
+          @resetColumns="handleResetColumns"
+        />
+      </NSpace>
+      <NDataTable
+        ref="tableRef"
+        v-bind="$attrs"
+        v-model:checked-row-keys="checkedRowKeys"
+        :row-key="getRowKey"
+        :columns="filterColumns"
+        :loading="loading"
+        :data="data"
+        :pagination="mergePagination"
+        :striped="striped"
+        :size="size"
+        remote
+        flex-height
+        :style="{
+          height: height || (autoHeight ? `${tableHeight}px` : null),
+          minHeight: '300px',
+        }"
+        @update:sorter="handleUpdateSorter"
+      />
+    </div>
   </div>
 </template>
 
