@@ -128,7 +128,18 @@ defineExpose({
           <VFormItem
             :schema="schema"
             :form-props="formProps"
-          />
+          >
+            <template
+              v-for="(slot, key, index) in ($slots as any)"
+              :key="index"
+              #[key]="props"
+            >
+              <Component
+                :is="slot"
+                v-bind="props"
+              />
+            </template>
+          </VFormItem>
         </template>
       </VGrid>
     </NForm>
