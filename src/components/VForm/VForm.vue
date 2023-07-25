@@ -118,6 +118,7 @@ defineExpose({
       v-bind="formProps"
     >
       <VGrid
+        v-bind="giProps"
         :children="schemas"
         :gi-span="giSpan"
         :x-gap="16"
