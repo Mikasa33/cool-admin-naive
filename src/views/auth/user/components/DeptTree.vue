@@ -6,7 +6,6 @@ import { deepTree, revDeepTree } from '@/utils'
 const emit = defineEmits(['refresh'])
 
 const message = useMessage()
-const { hasPermission } = usePermission()
 
 const treeRef = ref()
 const editRef = ref()
@@ -24,7 +23,7 @@ async function load(params: any) {
 }
 
 async function handleRefresh() {
-  await unref(treeRef).refresh()
+  await unref(treeRef).reload()
 }
 
 function handleAdd(record: any) {
