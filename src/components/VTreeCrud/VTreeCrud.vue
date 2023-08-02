@@ -1,20 +1,9 @@
 <script lang="ts" setup>
 import type { TreeDropInfo, TreeOption } from 'naive-ui'
+import type { TreeCurdProps } from './types'
 import { revDeepTree } from '@/utils'
 
-export interface Props {
-  title?: string
-  selectedKeys?: string[] | number[]
-  draggable?: boolean
-  load: Function
-  delete: Function
-  isAdd?: boolean
-  isUpdate?: boolean
-  isDelete?: boolean
-  permission?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<TreeCurdProps>(), {
   selectedKeys: () => [],
   draggable: false,
   isAdd: false,
@@ -22,7 +11,12 @@ const props = withDefaults(defineProps<Props>(), {
   isDelete: true,
 })
 
-const emit = defineEmits(['update:selected-keys', 'add', 'edit', 'drop'])
+const emit = defineEmits<{
+  (evt: 'update:selected-keys', value: string[] | number[], option: Array<TreeOption | null>): void
+  (evt: 'add', value?: any): void
+  (evt: 'edit', value: any): void
+  (evt: 'drop', value: any): void
+}>()
 
 const attrs = useAttrs()
 const dialog = useDialog()
@@ -125,8 +119,11 @@ function handleSelectDropdown(key: 'add' | 'edit' | 'delete') {
       },
     })
   }
+  else if (key === 'edit') {
+    emit('edit', dropdown.data)
+  }
   else {
-    emit(key, dropdown.data)
+    emit('add')
   }
 }
 
@@ -134,13 +131,9 @@ function handleClickoutsideDropdown() {
   dropdown.show = false
 }
 
-function handleUpdateSelectedKeys(keys: string[] | number[], option: Array<TreeOption | null>) {
+function handleUpdateSelectedKeys(keys: string[] | number[], options: Array<TreeOption | null>) {
   if (keys.length)
-    emit('update:selected-keys', keys, option)
-}
-
-function handleAdd() {
-  emit('add')
+    emit('update:selected-keys', keys, options)
 }
 
 function findSiblingsAndIndex(node: TreeOption, nodes?: TreeOption[]): [TreeOption[], number] | [null, null] {
@@ -205,27 +198,30 @@ onMounted(() => {
 })
 
 defineExpose({
-  refresh: load,
+  reload: load,
   getData: () => unref(data),
 })
 </script>
 
 <template>
   <NCard
-    size="small"
     :bordered="false"
     :segmented="{
       content: true,
       action: true,
     }"
+    :header-style="{ padding: '0 24px' }"
     class="h-full"
   >
     <template #header>
       <NSpace
         align="center"
         justify="space-between"
+        class="h-52px"
       >
-        <div>{{ title }}</div>
+        <div class="text-16px">
+          {{ title }}
+        </div>
         <div class="flex">
           <NTooltip trigger="hover">
             <template #trigger>
@@ -245,7 +241,7 @@ defineExpose({
             <template #trigger>
               <div
                 class="ml-8px h-24px w-24px flex-center cursor-pointer rounded-3px text-18px transition-base hover:bg-[rgba(0,0,0,0.09)]"
-                @click="handleAdd"
+                @click="emit('add')"
               >
                 <div class="i-icon-park-outline-plus" />
               </div>

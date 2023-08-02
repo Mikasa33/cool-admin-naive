@@ -1,29 +1,11 @@
 <script setup lang="ts">
-import type { ButtonProps, ModalProps } from 'naive-ui'
 import { uniqueId } from 'lodash-es'
+import type { ModalProps } from './types'
 import startDrag from '@/utils/drag'
 
-interface Props {
-  modalProps?: ModalProps
-  title?: string
-  width?: number | string
-  showAction?: boolean
-  showConfirmAction?: boolean
-  showCancelAction?: boolean
-  actions?: any[]
-  confirmLabel?: string
-  confirmType?: ButtonProps['type']
-  confirmLoading?: boolean
-  cancelLabel?: string
-  cancelType?: string
-  cancelLoading?: boolean
-  isCrud?: boolean
-  drag?: boolean
-  fullscreen?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<ModalProps>(), {
   width: '800px',
+  loading: false,
   showAction: true,
   showConfirmAction: true,
   showCancelAction: true,
@@ -45,7 +27,11 @@ const props = withDefaults(defineProps<Props>(), {
   fullscreen: true,
 })
 
-const emit = defineEmits(['clickAction', 'confirm', 'cancel'])
+const emit = defineEmits<{
+  (evt: 'clickAction', value: any): void
+  (evt: 'confirm', value: any): void
+  (evt: 'cancel'): void
+}>()
 
 const modalRef = ref()
 const modalContainerRef = computed(() => unref(modalRef)?.containerRef)
@@ -148,11 +134,11 @@ defineExpose({
 <template>
   <NModal
     :id="vModalId"
+    v-bind="$attrs"
     ref="modalRef"
+    :auto-focus="false"
     :show="show"
     preset="card"
-    :auto-focus="false"
-    v-bind="modalProps"
     :segmented="{
       content: true,
       action: true,
@@ -188,7 +174,7 @@ defineExpose({
         <slot />
       </div>
     </NScrollbar>
-    <template v-if="showAction" #action>
+    <template v-if="showAction && !loading" #action>
       <NSpace justify="end">
         <template v-for="(action, index) in mergeActions">
           <NButton

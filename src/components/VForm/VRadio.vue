@@ -4,7 +4,7 @@ import { NRadio, NRadioButton } from 'naive-ui'
 const props = defineProps<{
   value?: string | number | null
   options?: any[]
-  type?: 'group' | null
+  type?: 'button' | null
 }>()
 
 const emit = defineEmits(['update:value'])
@@ -14,7 +14,7 @@ function handleUpdateValue(val: any) {
 }
 
 function getComponent() {
-  return props.type === 'group' ? NRadioButton : NRadio
+  return props.type === 'button' ? NRadioButton : NRadio
 }
 </script>
 
@@ -24,7 +24,7 @@ function getComponent() {
     v-bind="$attrs"
     @update:value="handleUpdateValue"
   >
-    <NSpace v-if="props.type !== 'group'">
+    <NSpace v-if="props.type !== 'button'">
       <Component
         :is="getComponent()"
         v-for="(opt, index) in options"

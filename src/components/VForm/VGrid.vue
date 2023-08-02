@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { vFormGetPropKey } from '../inject'
+import { vFormGetProp } from '../inject'
 
 withDefaults(defineProps<{
   giSpan?: number | string
@@ -8,7 +8,7 @@ withDefaults(defineProps<{
   giSpan: 24,
 })
 
-const getProp = inject(vFormGetPropKey) as Function
+const getProp = inject(vFormGetProp) as Function
 </script>
 
 <template>

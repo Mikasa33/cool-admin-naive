@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { isFunction } from 'lodash-es'
 import type { FormProps } from 'naive-ui'
-import { vFormGetPropKey, vFormModel } from '../inject'
+import { vFormGetProp, vFormModel } from '../inject'
 import { componentMap } from './componentMap'
 
 defineProps<{
@@ -10,7 +10,7 @@ defineProps<{
 }>()
 
 const model = inject(vFormModel) as any
-const getProp = inject(vFormGetPropKey) as Function
+const getProp = inject(vFormGetProp) as Function
 
 function isSelectComponent(component: string) {
   return ['NCascader', 'NDatePicker', 'VIconSelect', 'VSelect', 'VTreeSelect'].includes(component)

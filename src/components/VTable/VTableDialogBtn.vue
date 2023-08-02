@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { vTableCheckedRowKey } from '../inject'
+import { vTableCheckedRowKeys } from '../inject'
 
 const props = withDefaults(defineProps<{
   text?: string
@@ -12,7 +12,7 @@ const emit = defineEmits(['confirm', 'cancel'])
 
 const dialog = useDialog()
 
-const checkedRowKeys = inject<any[]>(vTableCheckedRowKey)
+const checkedRowKeys = inject<any[]>(vTableCheckedRowKeys)
 
 function handleClick() {
   const d = dialog.warning({

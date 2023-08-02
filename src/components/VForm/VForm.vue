@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { clone, isFunction, isUndefined } from 'lodash-es'
 import type { FormProps, GridProps } from 'naive-ui'
-import { vFormGetPropKey, vFormModel } from '../inject'
+import { vFormGetProp, vFormModel } from '../inject'
 
 interface Props {
   loading?: boolean
@@ -96,7 +96,7 @@ function getProp(schema: any, prop: any, defaultValue?: any) {
 }
 
 provide(vFormModel, model)
-provide(vFormGetPropKey, getProp)
+provide(vFormGetProp, getProp)
 
 defineExpose({
   init,

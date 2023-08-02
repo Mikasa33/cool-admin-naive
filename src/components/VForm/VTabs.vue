@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { vFormGetPropKey } from '../inject'
+import { vFormGetProp } from '../inject'
 
 withDefaults(defineProps<{
   children: any[]
 }>(), {
 })
 
-const getProp = inject(vFormGetPropKey) as Function
+const getProp = inject(vFormGetProp) as Function
 </script>
 
 <template>
